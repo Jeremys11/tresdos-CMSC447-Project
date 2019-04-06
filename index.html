@@ -3,9 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>Conway's Game of Life</title>
+    <script src="gameoflife.js"></script>
   </head>
   <body>
     <script src="main.js"></script>
+    <div id="canvas-container">
+        <div id="canvas-div"></div>
+
+        <form>
+            <select id="shapes">
+            </select>
+            <input id="next" type="button" value="Next">
+            <input id="start" type="button" value="Start">
+            <img src="pix/speeddial.svg" alt="" width="20" height="20">
+            <input id="speed" type="range" min="10" max="500" step="49" value="10" title="speed dial">
+            <img src="pix/grid.svg" alt="" width="20" height="20">
+            <input id="size" type="range" min="2" max="11" value="2" title="grid size">
+            <label id="generation">0</label>
+        </form>
+    </div>
+
   </body>
 <h1>Conway's Game of Life</h1>
 </html>
