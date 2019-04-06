@@ -19,7 +19,7 @@ var Canvas = mClass(function() {
 			if (!canvasElement.first.getContext) {
 				return;
 			}
-			this.pixelWidth = canvasElement.first.width = 803;
+			this.pixelWidth = canvasElement.first.width = 9999;
 			this.pixelHeight = canvasElement.first.height = 506;
 			container.appendChild(canvasElement.first);
 			this.ctx = canvasElement.first.getContext('2d');
