@@ -1,0 +1,31 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+}
+
+#main {
+  position: absolute;
+  width: 96%;
+  left: 2%;
+  height: 85%;
+  top: 5%;
+  background-image: none;
+  background-color: rgb(236, 208, 208);
+}
+
+
+
+#cell-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  margin: 0px;
+}
+
+#ticker {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+}
