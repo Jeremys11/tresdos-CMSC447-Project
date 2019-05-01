@@ -1,8 +1,12 @@
 const MIN_DIM = 10;
 const MAX_DIM = 100;
-
+const CELL_GRID_ID = "cell-grid"
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 
+
+
+
+var selectedCells = [];
 var cellGrid = [];
 var COLORS = ["red", "green", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
@@ -41,7 +45,7 @@ function cellUniverse() {
 	}
 
 	this.generateTable = function () {
-		var tableGrid = document.getElementById('cell-grid'); //GENERATE TABLE SHOULD DECIDE ROWS/COLS
+		var tableGrid = document.getElementById(CELL_GRID_ID); //GENERATE TABLE SHOULD DECIDE ROWS/COLS
 		tableGrid.innerHTML = "";
 
 		var numRows = this.bottomBound;
@@ -52,6 +56,14 @@ function cellUniverse() {
 			var gridRow = tableGrid.rows[i];
 			for (var j = 0; j <= numCols; j++) {
 				gridRow.insertCell();
+				gridRow.cells[j].id = "cell" + i + "!" + j;
+	
+				gridRow.cells[j].onclick = function(e) {
+					selectCell(this.id.substring(4))
+				}
+				gridRow.cells[j].onmouseover = function(e) {
+					hoverCell(this.id.substring(4));
+				}
 			}
 		}
 	}
@@ -72,7 +84,7 @@ function cellUniverse() {
 	}
 
 	this.updateBounds = function () {
-		var tableGrid = document.getElementById('cell-grid');
+		var tableGrid = document.getElementById(CELL_GRID_ID);
 		var gridHeight = tableGrid.offsetHeight;
 		var gridWidth = tableGrid.offsetWidth;
 
@@ -88,22 +100,44 @@ function cellUniverse() {
 }
 
 function updateCellAppearance(y, x, status) {
-	var tableGrid = document.getElementById('cell-grid');
+	var tableGrid = document.getElementById(CELL_GRID_ID);
 	tableGrid.rows[y].cells[x].style.backgroundColor = COLORS[status];
 	
 
 }
 
 
+function hoverCell(id) {
+
+}
 
 
+function parseCellID(id) {
+	index = id.indexOf("cell");
+	var seperator  = id.indexOf("!");
+	if(index == -1) index = 0;
+	else index = 4;
+	var y = id.substring(index, seperator);
+	var x = id.substring(seperator + 1);
+	console.log(y, x);
+	return [y, x];
+}
 
-
-
-
-
-
-
+function selectCell(id) {
+	var cell = document.getElementById("cell" + id);	
+	var coor = parseCellID(id);
+	index = selectedCells.indexOf(id);
+	if(index != -1) {
+		console.log("already Exits")
+		cellGrid[coor[0]][coor[1]].updateAppearance();
+		selectedCells.splice(index, 1);
+	}
+	else {
+		console.log("mew");
+		cell.style.backgroundColor = "yellow";
+		selectedCells.push(id);
+	}
+}
 
 function Cell(y, x) {
 	this.isAlive = true;
@@ -111,6 +145,7 @@ function Cell(y, x) {
 	this.isAliveNextRound = true;
 	this.yCoordinate = y;
 	this.xCoordinate = x;
+	this.isSelected = false;
 
 
 
@@ -280,6 +315,16 @@ document.getElementById("ticker").addEventListener("click", tick);
 document.getElementById("size").defaultValue = CELL_DIMENSION;
 document.getElementById("confirm-size").addEventListener("click", changeSize);
 
+
+/*var td = document.getElementsByTagName("td");
+
+for (var i = 0; i < td.length; i++) {
+  td[i].onclick = function() {
+		this.style.fontWeight = "bold";
+		console.log("opo");
+  }
+}
+*/
 
 
 demo();
