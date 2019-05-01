@@ -5,7 +5,7 @@
     <title>Conway's Game of Life</title>
     
   </head>
-  <body onresize="windowResized()">
+  <body onresize="windowResize()">
     <div id="main">
         <table  id="cell-grid" border="1">
            
@@ -19,7 +19,8 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     
     <div id="bottom-panel">
-       <button id="ticker">Tick</button> 
+       <button id="ticker">Tick</button>
+       <button id="clear-selected">Clear Selected</button> 
       <span id="cellbox">Cell Size: <input type="number" id="size" min="10" max="100"> <input id="confirm-size" type="submit"></span>
     </div>
     
