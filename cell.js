@@ -1,5 +1,5 @@
-const MIN_DIM = 7;
-
+const MIN_DIM = 10;
+const MAX_DIM = 100;
 
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 
@@ -57,6 +57,14 @@ function cellUniverse() {
 	}
 
 	this.resize = function (newDim) {
+		if(newDim > MAX_DIM) {
+			alert("Too Big. Can't be bigger than: " + MAX_DIM + " square pixels");
+			return;
+		}
+		else if(newDim < MIN_DIM) {
+			alert("Too Small. Can't be smaller than: " + MIN_DIM + " square pixels");
+			return;
+		}
 		CELL_DIMENSION = newDim;
 		this.updateBounds();
 		this.generateTable();
@@ -260,6 +268,10 @@ function tick() {
 function changeSize() {
 	var newSize = document.getElementById("size").value;
 	world.resize(newSize);
+}
+
+function windowResized() {
+	world.resize(CELL_DIMENSION);
 }
 
 var world = new cellUniverse();
