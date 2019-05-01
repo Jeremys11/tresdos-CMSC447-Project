@@ -113,13 +113,7 @@ function hoverCell(id) {
 
 
 function parseCellID(id) {
-	index = id.indexOf("cell");// remvoe
-	var seperator  = id.indexOf("!");
-	if(index == -1) index = 0;
-	else index = 4;
-	var y = id.substring(index, seperator);
-	var x = id.substring(seperator + 1);
-	return [y, x];
+	return id.split('!');
 }
 
 function selectCell(id) {
@@ -134,11 +128,20 @@ function selectCell(id) {
 	else {
 		var cellColor = cell.style.backgroundColor;
 		console.log(cellColor);
-		//color1 = cellColor.substring(0, cellColor.length - 1) + ", "
-		cell.style.background = "radial-gradient(rgba(255,0,0,0), rgba(255,0,0,1))";
+		cell.style.background = makeOpaqueGradient("radial", cellColor);
 		selectedCells.push(id);
 	}
 }
+
+function makeOpaqueGradient(gradientType, color) {
+	color = color.substring(color.indexOf('(') + 1, color.indexOf(')'));
+	color = color.split(',');
+	console.log(color)
+	var gradient = gradientType + "-gradient(rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + "0), rgba(" + color[0] + "," + color[1] + "," + color[2] + ",1))";
+	console.log(gradient)
+	return gradient;
+}
+
 
 function Cell(y, x) {
 	this.isAlive = true;
