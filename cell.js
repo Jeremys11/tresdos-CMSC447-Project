@@ -8,7 +8,7 @@ var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["red", "green", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
 
 function cellUniverse() {
@@ -56,13 +56,13 @@ function cellUniverse() {
 			var gridRow = tableGrid.rows[i];
 			for (var j = 0; j <= numCols; j++) {
 				gridRow.insertCell();
-				gridRow.cells[j].id = "cell" + i + "!" + j;
+				gridRow.cells[j].id = i + "!" + j;
 	
 				gridRow.cells[j].onclick = function(e) {
-					selectCell(this.id.substring(4))
+					selectCell(this.id)
 				}
 				gridRow.cells[j].onmouseover = function(e) {
-					hoverCell(this.id.substring(4));
+					hoverCell(this.id);
 				}
 			}
 		}
@@ -113,18 +113,17 @@ function hoverCell(id) {
 
 
 function parseCellID(id) {
-	index = id.indexOf("cell");
+	index = id.indexOf("cell");// remvoe
 	var seperator  = id.indexOf("!");
 	if(index == -1) index = 0;
 	else index = 4;
 	var y = id.substring(index, seperator);
 	var x = id.substring(seperator + 1);
-	console.log(y, x);
 	return [y, x];
 }
 
 function selectCell(id) {
-	var cell = document.getElementById("cell" + id);	
+	var cell = document.getElementById(id);	
 	var coor = parseCellID(id);
 	index = selectedCells.indexOf(id);
 	if(index != -1) {
@@ -133,8 +132,10 @@ function selectCell(id) {
 		selectedCells.splice(index, 1);
 	}
 	else {
-		console.log("mew");
-		cell.style.backgroundColor = "yellow";
+		var cellColor = cell.style.backgroundColor;
+		console.log(cellColor);
+		//color1 = cellColor.substring(0, cellColor.length - 1) + ", "
+		cell.style.background = "radial-gradient(rgba(255,0,0,0), rgba(255,0,0,1))";
 		selectedCells.push(id);
 	}
 }
@@ -277,6 +278,15 @@ function Cell(y, x) {
 	this.tick = function () {
 		this.setIsAlive(this.isAliveNextRound);
 		this.updateAppearance();
+	}
+
+	this.getColor = function() { //refactor
+		if(this.isAlive() == true) {
+			if(this.isFixed() == true) return COLORS[3]; //alive and fixed
+			else return Colors[1]; //alive not fixed
+		}
+		else if(this.isFixed() == true) return COLORS[2]; //dead and fixed
+		else return COLORS[0]; //dead not fixed;
 	}
 
 }

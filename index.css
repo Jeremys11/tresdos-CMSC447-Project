@@ -25,8 +25,6 @@ html, body {
  
 }
 
-
-
 #cell-grid {
   position: relative;
   width: 100%;
@@ -45,4 +43,10 @@ html, body {
   position: absolute;
   bottom: 60%;
   left: 50%;
+}
+
+td:hover {
+  transition: opacity .001s;
+  opacity: .3;
+  z-index: 2;
 }
