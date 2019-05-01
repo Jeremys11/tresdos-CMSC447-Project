@@ -52,6 +52,7 @@ function cellUniverse() {
 			var gridRow = tableGrid.rows[i];
 			for (var j = 0; j <= numCols; j++) {
 				gridRow.insertCell();
+				gridRow.cells[j].id = "resizable";
 			}
 		}
 	}
