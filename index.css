@@ -29,6 +29,10 @@ html, body {
   font-family: 'Abel';font-size: 40px;
 }
 
+#cell_slier_text{
+  font-family: 'Abel';font-size: 40px;
+}
+
 .slidecontainer {
   width: 10%; /* Width of the outside container */
 }
