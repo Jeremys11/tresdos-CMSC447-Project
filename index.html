@@ -3,26 +3,67 @@
   <head>
     <meta charset="utf-8">
     <title>Conway's Game of Life</title>
-    <script src="gameoflife.js"></script>
   </head>
-  <body>
-    <script src="main.js"></script>
-    <div id="canvas-container">
-        <div id="canvas-div"></div>
 
-        <form>
-            <select id="shapes">
-            </select>
-            <input id="next" type="button" value="Next">
-            <input id="start" type="button" value="Start">
-            <img src="pix/speeddial.svg" alt="" width="20" height="20">
-            <input id="speed" type="range" min="10" max="500" step="49" value="10" title="speed dial">
-            <img src="pix/grid.svg" alt="" width="20" height="20">
-            <input id="size" type="range" min="2" max="11" value="2" title="grid size">
-            <label id="generation">0</label>
+  <body onresize="windowResize()">
+
+
+
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <h1 id="title"> Conway's Game of Life</h1>
+    <div id="main">
+
+      	<table  id="cell-grid" border="1">      
+     	 </table>
+      <div class="box controls" id='Controls'>
+        <div class="subtitle" id="Control_text">Controls</div>
+        <form action="">
+          <input type="button" value=&#9654; id="ticker" title="Run Simulation one Step at a time" />
+	  <span id="RunStatus"> <input type="button" value=&#9646;&#9654; id="Run" title="Run Simulation until paused" /> </span>
+          <!--<input type="button" value=&#9646;&#9654; id="Run" title="Run Simulation until paused" />-->
+
+          <input type="button" value=&#9646;&#9646; id="Pause" title="Pause Simulation" />
+          <input type="button" value="Undo" id="Undo" title="Undo until last user modification" />
+	  <input type="button" value="Clear All" id="Clear_all" title="Sets all cells on board to dead" />
+	  <input type=button id="clear-selected" value="Clear Selected" /> 
         </form>
-    </div>
+	</div>
+      	<div id="speed_slider" class="slidecontainer" >
+        	<input type="range" min="1" max="100" value="50" class="slider" id="speed_range" title="Sets speed of simulation"/>
+		<output id="speed_slider_output"></output>
+	</div>
 
+
+	<div class="box controls">
+        <div class="subtitle">Grid Settings</div>
+        <form action="">
+          <input type="button" value="Set Colors" id="set_colors" title="Set Colors of different types of cells" />
+          <input type="button" value="Set Cell Dead" id="set_dead" title="All cells that are clicked in this mode turn dead" />
+          <input type="button" value="Set Cell Alive" id="set_alive" title="All cells that are clicked in this mode turn alive" />
+          <input type="button" value="Set Cell Fixed Dead" id="set_fixed_dead" title="All cells that are clicked in this mode turn fixed dead" />
+	  <input type="button" value="Set Cell Fixed Alive" id="set_fixed_alive" title="All cells that are clicked in this mode turn fixed alive" />
+	<input type="button" value="Set Grid Dimension" id="set_grid_dimension" title="Set the dimension of the grid"/>
+        </form>
+	</div>
+
+	<div class="box controls">
+        <div class="subtitle">Extra Settings
+	<select id="Language_Select" title="Select Language">
+	  <option id="English_select" value="English">English</option>
+	  <option id="German_select" value="German">German</option>
+	</select>
+
+      	<div id="size_slider" class="slidecontainer" >
+        	<input type="range" min="30" max="100" value="50" class="slider" id="cell_size" title="Sets the size of the blocks"/>
+		<output id="cell_size_output"></output>
+	</div>
+
+	</div>
+        <form action="">
+        </form>
+	</div>
+
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script type="text/javascript" src="cell.js"></script>
   </body>
-<h1>Conway's Game of Life</h1>
 </html>
