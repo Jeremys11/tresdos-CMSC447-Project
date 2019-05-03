@@ -6,7 +6,9 @@ html, body {
 }
 
 #title{
+  position: absolute;
   text-align: center;
+  left: 40%;
   font-family: 'Abel';font-size: 40px;
 }
 
@@ -19,10 +21,12 @@ html, body {
 
 #speed_slider_text{
   font-family: 'Abel';font-size: 40px;
+  width: 15%;
 }
 
 #grid_settings_text{
   font-family: 'Abel';font-size: 40px;
+  width: 15%;
 }
 
 #extra_settings_text{
@@ -78,8 +82,8 @@ html, body {
   position: absolute;
   width: 96%;
   left: 2%;
-  height: 75%;
-  top: 10%;
+  height: 55%;
+  top: 12%;
   background-image: none;
   background-color: rgb(255, 255, 255);
 }
@@ -89,7 +93,7 @@ html, body {
    width: 96%;
    left: 2%;
    height: 25%;
-   top: 85%;
+   top: 65%;
 }
 
 #cell-grid {
@@ -201,7 +205,7 @@ td:hover {
 }
 
 .btn-2b:hover {
-	box-shadow: 0 8px #ab3c3c;
+	box-shadow: 0 8px #ab3c3c;c
 	top: -2px;
 }
 
@@ -210,6 +214,106 @@ td:hover {
 	top: 6px;
 }
 
+
+/* Hamburger Menu 
+
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
+.nav-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: "Trebuchet MS" , Arial;
+}
+.nav-wrapper::before,
+.nav-wrapper::after{
+  content: '';
+  position: relative;
+  width: 100%;
+  height: 50%;
+}
+.nav-wrapper::after{
+}
+
+.nav-wrapper nav{
+  position: relative;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.navigation{
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding-right: 30px;
+  line-height: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-wrapper ul{
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  width: 0;
+  overflow: hidden;
+  transition: .4s cubic-bezier(.77,0,.18,1);
+}
+.nav-wrapper.active ul{
+  width: 420px;
+  margin-right: 20px;
+}
+
+a{
+  color: #888;
+  text-decoration: none;
+  transition: .3s;
+}
+a:hover{
+  color: #3C9DFB;
+}
+
+.nav-toogler{
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 48px;
+  padding: 14px 5px;
+  cursor: pointer;
+}
+.nav-wrapper:not(.active) .nav-toogler{
+  margin-left: -10px;
+}
+.nav-toogler::before,
+.nav-toogler::after{
+  content: '';
+  position: relative;
+  display: block;
+  width: 30px;
+  height: 3px;
+  background-color: #3C9DFB;
+  transition: .4s cubic-bezier(.77,0,.18,1);
+}
+.nav-toogler::after {
+  margin-top: 10px;
+}
+.nav-wrapper.active .nav-toogler::before,
+.nav-wrapper.active .nav-toogler::after{
+  position: absolute;
+  top: 50%;
+  background-color: #3C9DFB;
+  transform: rotate(135deg);
+}
+.nav-wrapper.active .nav-toogler::after {
+  transform: rotate(-135deg);
+  margin-top: 0;
+}
+*/
 
 
 

@@ -402,6 +402,13 @@ function getSpeed_slider() {
    console.log(speed)
 }
 
+/*
+let navWrapper = document.querySelector('.nav-wrapper'), navToogler =  document.querySelector('.nav-toogler')
+
+navToogler.addEventListener('click', function (event) {
+	navWrapper.classList.toggle('active')
+})
+*/
 
 /*var td = document.getElementsByTagName("td");
 
