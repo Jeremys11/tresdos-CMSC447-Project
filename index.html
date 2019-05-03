@@ -22,11 +22,11 @@
         <div class="subtitle" id="Control_text">Controls</div>
         <form action="">
           <input type="button" class="btn btn-2 btn-2b" value=&#9654; id="ticker" title="Run Simulation one Step at a time" />
-	  <input type="button" class="btn btn-2 btn-2b" value=&#9646;&#9654; id="Run" title="Run Simulation until paused" />
+	  <input type="button" class="btn btn-2 btn-2b" value=&#9654;&#9654; id="Run" title="Run Simulation until paused" />
           <!--<input type="button" value=&#9646;&#9654; id="Run" title="Run Simulation until paused" />-->
 
           <input type="button" class="btn btn-2 btn-2b" value=&#9646;&#9646; id="Pause" title="Pause Simulation" />
-          <input type="button" class="btn btn-2 btn-2b" value="Undo" id="Undo" title="Undo until last user modification" />
+          <input type="button" class="btn btn-2 btn-2b" value=&#8592 id="Undo" title="Undo until last user modification" />
 	  <input type="button" class="btn btn-2 btn-2b" value="Clear All" id="Clear_all" title="Sets all cells on board to dead" />
 	  <input type="button" class="btn btn-2 btn-2b" id="clear-selected" value="Clear Selected" title="Sets Selected Cells to Dead" /> 
         </form>
@@ -53,8 +53,8 @@
 	<div class="box controls">
         <div class="subtitle" id="extra_settings_text">Extra Settings
 	<select id="Language_Select" title="Select Language">
-	  <option id="English_select" value="English">English</option>
-	  <option id="German_select" value="German">German</option>
+	  <option id="engOption" ></option>
+	  <option id="getOption" ></option>
 	</select>
 
       	<div id="size_slider" class="slidecontainer" >
@@ -67,7 +67,10 @@
 
 </div>
 
+
     <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="bundle.js"></script>
     <script type="text/javascript" src="cell.js"></script>
 
   </body>
