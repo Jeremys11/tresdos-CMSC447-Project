@@ -1,0 +1,12 @@
+{
+    "title": "Conways Spiel des Lebens",
+    "engOption": "Englisch",
+    "gerOption": "Deutsche",
+    "jpOption" : "Japanisch",
+    "tChorus": "Chor",
+    "bChorus": "Ja, ich werde mein Pferd zur alten Stadtstraße bringen <br> Ich werde fahren, bis ich nicht mehr kann <br> Ich werde mein Pferd zur alten Stadtstraße bringen <br> Ich werde fahren, bis ich nicht mehr kann",
+    "tVerse1": "Strophe 1",
+    "bVerse1": " Ich habe die Pferde hinten <br> Pferdewagen ist beigefügt <br> Mein Hut ist mattschwarz<br> Ich habe schwarze Stiefel dazu <br> Ich reite auf einem Pferd, ha <br> Sie können Ihren Porsche fahren <br> Ich war im Tal <br> Sie haben Ihre Veranda nicht verlassen",
+    "tBridge": "Bridge",
+    "bBridge": "Chorus"
+}
