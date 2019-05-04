@@ -4,7 +4,7 @@ const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 
-
+var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
 var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
@@ -108,6 +108,7 @@ function Cell(y, x) {
     this.yCoordinate = y;
     this.xCoordinate = x;
     this.isSelected = false;
+    this.cellState = []; 
 
 
 
@@ -237,6 +238,7 @@ function Cell(y, x) {
     }
 
     this.tick = function () {
+        this.cellState[ROUND_NUM - 1] = this.getIsAlive();
         this.setIsAlive(this.isAliveNextRound);
         this.updateAppearance();
     }
@@ -269,6 +271,7 @@ function demo() {
 
 function tick() {
     clearSelected();
+    ROUND_NUM++;
     world.tick();
 }
 

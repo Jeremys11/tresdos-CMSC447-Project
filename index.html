@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Conway's Game of Life</title>
-    
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Conway's Game of Life</title>
+  <link rel="stylesheet" href="stylesheet.css" type="text/css">
+</head>
+
+<body>
+
   <body onresize="windowResize()">
+    <div id="top-panel">
+    <h1 id="title">Conway's Game of Life</h1>
+    </div>
     <div id="main">
-        <table  id="cell-grid" border="1">
-           
-      
-          </table>
-
+      <table id="cell-grid"></table>
     </div>
-
- 
-
-    <link rel="stylesheet" type="text/css" href="index.css">
-    
-    <div id="bottom-panel">
-       <button id="ticker">Tick</button>
-       <button id="clear-selected">Clear Selected</button> 
-      <span id="cellbox">Cell Size: <input type="number" id="size" min="10" max="100"> <input id="confirm-size" type="submit"></span>
-    </div>
-    
+    <div id="bottom-panel"></div>
   </body>
   <script type="text/javascript" src="cell.js"></script>
+
 </html>
