@@ -5,7 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Conway's Game of Life</title>
-  <link rel="stylesheet" href="stylesheet.css" type="text/css">
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 </head>
 
 <body>
@@ -17,8 +19,17 @@
     <div id="main">
       <table id="cell-grid"></table>
     </div>
-    <div id="bottom-panel"></div>
+    <div id="bottom-panel">
+      <div id="box1">
+        <button id="restore-btn" class="btn btn-1 btn-1d"><i class="material-icons md-30">
+          restore
+          </i></button>
+      </div>
+      <div id="box2"></div>
+      <div id="box3"></div>
+    </div>
   </body>
-  <script type="text/javascript" src="cell.js"></script>
+  <script type="text/javascript" src="js/cell.js"></script>
+  <script src="js/modernizr.custom.js"></script>
 
 </html>

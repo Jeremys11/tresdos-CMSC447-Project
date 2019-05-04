@@ -379,10 +379,10 @@ function makeOpaqueGradient(gradientType, color) {
 }
 var world = new cellUniverse();
 world.resize(CELL_DIMENSION);
-document.getElementById("ticker").addEventListener("click", tick);
-document.getElementById("size").defaultValue = CELL_DIMENSION;
-document.getElementById("confirm-size").addEventListener("click", changeSize);
-document.getElementById("clear-selected").addEventListener("click", clearSelected);
+//document.getElementById("ticker").addEventListener("click", tick);
+//document.getElementById("size").defaultValue = CELL_DIMENSION;
+//document.getElementById("confirm-size").addEventListener("click", changeSize);
+//document.getElementById("clear-selected").addEventListener("click", clearSelected);
 
 
 /*var td = document.getElementsByTagName("td");

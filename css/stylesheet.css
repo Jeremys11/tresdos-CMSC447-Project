@@ -1,0 +1,134 @@
+html, body {
+  margin: 0px !important;  
+}
+#top-panel {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  margin: 0px;
+  text-align: center;
+  border: solid green 1px;
+}
+
+
+#main {
+  position: absolute;
+  width: 96%;
+  left: 2%;
+  height: 75%;
+  top: 10%;
+  margin: 0px;
+  background-color: rgb(236, 208, 208);
+}
+
+#bottom-panel {
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  bottom: 0%;
+  border: solid green 1px;
+}
+
+#box1 {
+  position: absolute;
+  width: 33.333%;
+  height: 100%;
+  left: 0%;
+  border: solid red 1px;
+
+}
+#box2 {
+  position: absolute;
+  width: 33.333%;
+  height: 100%;
+  left: 33.333%;
+  border: solid red 1px;
+}
+#box3 {
+  position: absolute;
+  width: 33%;
+  height: 100%;
+  right: 0%;
+  border: solid red 1px;
+}
+
+
+#restore-btn {
+  width: 50px;
+  height: 38px;
+}
+
+.material-icons.md-30 { font-size: 30px; }
+#cell-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  margin: 0px;
+}
+
+td:hover {
+  transition: opacity .001s;
+  opacity: .3;
+  z-index: 2;
+}
+
+
+.btn {
+	background: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	outline: none;
+	position: absolute;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	z-index: 0;
+}
+
+.btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-1 {
+	border: 3px solid darkgray;
+	color: darkgray;
+}
+
+.btn-1d {
+	overflow: hidden;
+}
+
+.btn-1d:after {
+	width: 0;
+	height: 103%;
+	top: 50%;
+	left: 50%;
+	background: darkgray;
+	opacity: 0;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.btn-1d:hover,
+.btn-1d:active {
+	color: white;
+}
+
+.btn-1d:hover:after {
+	width: 70%;
+	opacity: 1;
+}
+
+.btn-1d:active:after {
+	width: 101%;
+	opacity: 1;
+}
