@@ -45,6 +45,10 @@ html, body {
   width: 33.333%;
   height: 100%;
   left: 33.333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   border: solid red 1px;
 }
 #box3 {
@@ -56,6 +60,11 @@ html, body {
 }
 
 
+.mid-slider {
+  display: flex;
+  align-content: center;
+}
+
 .control-btn {
   width: 60px;
   height: 35px;
@@ -63,7 +72,10 @@ html, body {
 
 }
 
-.material-icons.md-30 { font-size: 25px; }
+.material-icons.md-30 { 
+  font-size: 25px; 
+  color: darkgray;
+}
 #cell-grid {
   position: absolute;
   width: 100%;
