@@ -31,6 +31,9 @@ html, body {
 
 #box1 {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 33.333%;
   height: 100%;
   left: 0%;
@@ -53,12 +56,14 @@ html, body {
 }
 
 
-#restore-btn {
-  width: 50px;
-  height: 38px;
+.control-btn {
+  width: 60px;
+  height: 35px;
+  margin-top: 5px;
+
 }
 
-.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-30 { font-size: 25px; }
 #cell-grid {
   position: absolute;
   width: 100%;
@@ -77,10 +82,10 @@ td:hover {
 .btn {
 	background: none;
 	cursor: pointer;
-	text-transform: uppercase;
+  text-transform: uppercase;
+  position: absolute;
 	letter-spacing: 1px;
 	outline: none;
-	position: absolute;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
@@ -88,8 +93,8 @@ td:hover {
 }
 
 .btn:after {
-	content: '';
-	position: absolute;
+  content: '';
+  position: absolute;
 	z-index: -1;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
@@ -123,6 +128,7 @@ td:hover {
 	color: white;
 }
 
+
 .btn-1d:hover:after {
 	width: 70%;
 	opacity: 1;
@@ -132,3 +138,15 @@ td:hover {
 	width: 101%;
 	opacity: 1;
 }
+.flex-container {
+  display: flex;
+  justify-content: space-between ;
+  width: 70%;
+  height: 50%;
+ }
+
+ .iconify { 
+   width: 28px; 
+   height: 28px; 
+   color: darkgray;
+  }

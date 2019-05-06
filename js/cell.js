@@ -9,7 +9,7 @@ var selectedCells = [];
 var cellGrid = [];
 var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
-
+//TODO: stop RESIZING AFTER CERTAIN SIZE;
 function cellUniverse() {
     this.leftBound = 0;
     this.topBound = 0;

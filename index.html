@@ -6,24 +6,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Conway's Game of Life</title>
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
 </head>
 
 <body>
 
   <body onresize="windowResize()">
     <div id="top-panel">
-    <h1 id="title">Conway's Game of Life</h1>
+      <h1 id="title">Conway's Game of Life</h1>
     </div>
     <div id="main">
       <table id="cell-grid"></table>
     </div>
     <div id="bottom-panel">
       <div id="box1">
-        <button id="restore-btn" class="btn btn-1 btn-1d"><i class="material-icons md-30">
-          restore
-          </i></button>
+        <div class="flex-container">
+          <div><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">restore</i></button></div>
+          <div><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">play_arrow</i></button></div>
+          <div><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">skip_next</i></button></div>
+        </div>
+        <div id="speed-slider">
+          <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+        </div>
+        
       </div>
       <div id="box2"></div>
       <div id="box3"></div>
