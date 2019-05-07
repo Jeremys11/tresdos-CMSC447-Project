@@ -89,7 +89,7 @@ html, body {
 
 .material-icons.md-30 { 
   font-size: 25px; 
-  color: darkgray;
+
 }
 #cell-grid {
   position: absolute;
@@ -141,7 +141,8 @@ td:hover {
 	width: 0;
 	height: 103%;
 	top: 50%;
-	left: 50%;
+  left: 50%;
+
 	background: darkgray;
 	opacity: 0;
 	-webkit-transform: translateX(-50%) translateY(-50%);
