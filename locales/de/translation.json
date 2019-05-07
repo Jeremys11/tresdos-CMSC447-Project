@@ -1,7 +1,9 @@
 {
     "title": "Conways Spiel des Lebens",
-    "change-language-title":"Sprache",
+    "change-language-title": "Sprache",
     "engOption": "Englisch",
     "gerOption": "Deutsche",
+    "alive": "am Leben",
+    "dead": "tot"
     
 }

@@ -1,6 +1,8 @@
 {
     "title": "Conway's Game of Life",
-    "change-language-title":"Language",
+    "change-language-title": "Language",
     "engOption": "English",
-    "gerOption": "German"
+    "gerOption": "German",
+    "alive": "alive",
+    "dead": "dead"
 }
