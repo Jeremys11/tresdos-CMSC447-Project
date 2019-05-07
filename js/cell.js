@@ -10,6 +10,9 @@ var cellGrid = [];
 var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
 
+var playState = false;
+var tick_freq = 1000 //1 second default
+
 
 //TODO: stop RESIZING AFTER CERTAIN SIZE;
 
@@ -118,8 +121,8 @@ function resetCounter() {
 }
 
 function updateCounter() {
-    document.getElementById("alive-text").innerText = numAlive;
-    document.getElementById("dead-text").innerText = numDead;
+    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
+    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
 }
 function countCell(y, x) {
     var cell = cellGrid[y][x];
@@ -308,6 +311,12 @@ function tick() {
     world.tick();
 }
 
+function reverseTick() {
+    clearSelected();
+    ROUND_NUM -= 2;
+    world.tick();
+}
+
 function changeSize() {
     var newSize = document.getElementById("size").value;
     world.resize(newSize); //add button disable
@@ -434,6 +443,57 @@ function openTab(evt, cityName) {
     evt.currentTarget.className += " active";
   }
 
+
+  var playInterval;
+
+  function disableButtons() {
+
+  }
+
+  function enableButtons() {
+
+  }
+
+  function showPlayButton() {
+    document.getElementById('play-btn').children[0].innerHTML = "play_arrow"
+  }
+
+  function showPauseButton() {
+    document.getElementById('play-btn').children[0].innerHTML = "pause"
+  }
+
+  function onPlay() {
+      if(playState == false) playGame();
+      else pauseGame();
+  }
+
+  function playGame() {
+      playState = true;
+      disableButtons()
+      showPauseButton();
+      playInterval = setInterval(tick, tick_freq);
+  }
+
+
+
+  function pauseGame() {
+      clearInterval(playInterval);
+      playState = false;
+      enableButtons();
+      showPlayButton();
+  }
+
+
+  function changeSpeed() {
+      var slider = document.getElementById('speed-slider');
+      console.log(slider.value);
+  }
+
+
+
+document.getElementById('play-btn').addEventListener('click', onPlay);
+document.getElementById('skip-btn').addEventListener('click', tick);
+document.getElementById('speed-slider').addEventListener('change', changeSpeed);
 
 
 var world = new cellUniverse();
