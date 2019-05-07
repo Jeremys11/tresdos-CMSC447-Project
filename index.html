@@ -23,15 +23,15 @@
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" onclick="openCity(event, 'London')"><span class="iconify info-icons"
+          <div> <button class="tablinks" onclick="openCity(event, 'game-stats-title')"><span class="iconify info-icons"
                 data-icon="whh:statistics" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openCity(event, 'Paris')"><span class="iconify info-icons"
+          <div> <button class="tablinks" onclick="openCity(event, 'change-language')"><span class="iconify info-icons"
                 data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
           <div> <button class="tablinks" onclick="openCity(event, 'how-to')"><span class="iconify info-icons"
                 data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
         </div>
 
-        <div id="London" class="tabcontent">
+        <div id="game-stats-title" class="tabcontent">
           <span id="game-stats" class="tab-title"><u>Game Stats</u></span>
           <ul>
             <li>Alive: 10</li>
@@ -39,8 +39,11 @@
           </ul>
         </div>
 
-        <div id="Paris" class="tabcontent">
-          <span id="how-to-play" class="tab-title">Language</span>
+        <div id="change-language" class="tabcontent">
+          <span id="change-language-title" class="tab-title">Language</span><br>
+          <input type="radio" name="demo" value="English" id="english-sel" class="form-radio" checked><label for="radio-one">English</label>
+          <input type="radio" name="demo" value="German" id="german-sel" class="form-radio"><label for="radio-one">German</label>
+
        
         </div>
 
