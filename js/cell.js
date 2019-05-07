@@ -7,7 +7,7 @@ var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(127, 127, 127, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
 
 var playState = false;
