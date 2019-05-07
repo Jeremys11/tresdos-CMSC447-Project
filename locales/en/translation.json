@@ -2,7 +2,7 @@
     "title": "Conway's Game of Life",
     "change-language-title": "Language",
     "engOption": "English",
-    "gerOption": "German",
-    "alive": "alive",
-    "dead": "dead"
+    "gerOption": "German"
+    //"alive": "alive",
+    //"dead": "dead"
 }
