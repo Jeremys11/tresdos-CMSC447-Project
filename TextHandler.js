@@ -20,7 +20,7 @@ $(document).ready(function(){
             "debug": true,
             "fallbackLng" : 'en',
             backend: {
-                loadPath: '{{lng}}/{{ns}}.json'
+                loadPath: 'locales/{{lng}}/{{ns}}.json'
             }
         },
         function(err,t){
