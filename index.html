@@ -5,17 +5,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Conway's Game of Life</title>
+
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
 </head>
 
 <body>
 
   <body onresize="windowResize()">
     <div id="top-panel">
-      <h1 id="title">Conway's Game of Life</h1>
+      <div id="title-box">
+        <h1>Conway's Game of Life</h1>
+      </div>
+      <div id="top-box" class="container">
+        <div class="tab">
+          <div> <button class="tablinks" onclick="openCity(event, 'London')"><span class="iconify info-icons"
+                data-icon="whh:statistics" data-inline="false"></span></button></div>
+          <div> <button class="tablinks" onclick="openCity(event, 'Paris')"><span class="iconify info-icons"
+                data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
+          <div> <button class="tablinks" onclick="openCity(event, 'how-to')"><span class="iconify info-icons"
+                data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
+        </div>
+
+        <div id="London" class="tabcontent">
+          <span id="game-stats" class="tab-title"><u>Game Stats</u></span>
+          <ul>
+            <li>Alive: 10</li>
+            <li>Dead: 20</li>
+          </ul>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+          <span id="how-to-play" class="tab-title">Language</span>
+       
+        </div>
+
+        <div id="how-to" class="tabcontent">
+            <span id="how-to-title" class="tab-title">How to Play</span>
+            <ul>
+              <li>A live cell with fewer than two live neighbours dies by underpopulation.</li>
+              <li>A live cell with two/three live neighbours lives on to the next generation.</li>
+              <li>A live cell more than three live neighbours dies by overpopulation.</li>
+              <li>A dead cell with three live neighbours becomes a live cell by reproduction.</li>
+              <li>A fixed cell will stay their type no matter what their neighbors are.</li>
+            </ul>
+        </div>
+      </div>
+
     </div>
+
     <div id="main">
       <table id="cell-grid"></table>
     </div>
@@ -41,9 +83,9 @@
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
         </div>
         <div class="mid-slider">
-            <span><i class="material-icons md-30">grid_on</i></span>
-            <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
-          </div>
+          <span><i class="material-icons md-30">grid_on</i></span>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+        </div>
       </div>
       <div id="box3"></div>
     </div>
