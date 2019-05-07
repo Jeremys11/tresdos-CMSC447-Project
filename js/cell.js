@@ -419,18 +419,6 @@ function openCity(evt, cityName) {
   }
 
 
-function changeLanguage(lang) {
-    console.log("language: " + lang);
-}
-
-  document.getElementById('english-sel').onchange = function() {
-      changeLanguage('en');
-  }
-  
-  document.getElementById('german-sel').onchange = function() {
-    changeLanguage('ge');
-}
-
 
 
 
