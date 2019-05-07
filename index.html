@@ -1,78 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Conway's Game of Life</title>
-  </head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Conway's Game of Life</title>
+
+  <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+
+</head>
+
+<body>
 
   <body onresize="windowResize()">
+    <div id="top-panel">
+      <div id="title-box">
+        <h1>Conway's Game of Life</h1>
+      </div>
+      <div id="top-box" class="container">
+        <div class="tab">
+          <div> <button class="tablinks" onclick="openCity(event, 'game-stats-title')"><span class="iconify info-icons"
+                data-icon="whh:statistics" data-inline="false"></span></button></div>
+          <div> <button class="tablinks" onclick="openCity(event, 'change-language')"><span class="iconify info-icons"
+                data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
+          <div> <button class="tablinks" onclick="openCity(event, 'how-to')"><span class="iconify info-icons"
+                data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
+        </div>
 
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+        <div id="game-stats-title" class="tabcontent">
+          <span id="game-stats" class="tab-title"><u>Game Stats</u></span>
+          <ul>
+            <li>Alive: 10</li>
+            <li>Dead: 20</li>
+          </ul>
+        </div>
 
+        <div id="change-language" class="tabcontent">
+          <span id="change-language-title" class="tab-title">Language</span><br>
+          <input type="radio" name="demo" value="English" id="english-sel" class="form-radio" checked><label for="radio-one">English</label>
+          <input type="radio" name="demo" value="German" id="german-sel" class="form-radio"><label for="radio-one">German</label>
 
-    <h1 data-i18n="title" id="title"> Conway's Game of Life</h1>
+       
+        </div>
 
-    <div id="main">
+        <div id="how-to" class="tabcontent">
+            <span id="how-to-title" class="tab-title">How to Play</span>
+            <ul>
+              <li>A live cell with fewer than two live neighbours dies by underpopulation.</li>
+              <li>A live cell with two/three live neighbours lives on to the next generation.</li>
+              <li>A live cell more than three live neighbours dies by overpopulation.</li>
+              <li>A dead cell with three live neighbours becomes a live cell by reproduction.</li>
+              <li>A fixed cell will stay their type no matter what their neighbors are.</li>
+            </ul>
+        </div>
+      </div>
 
-      	<table  id="cell-grid" border="1"></table>
- 
     </div>
 
-    <div id="OptionsHere">
+    <div id="main">
+      <table id="cell-grid"></table>
+    </div>
+    <div id="bottom-panel">
+      <div id="box1">
+        <div class="flex-container">
+          <div><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">restore</i></button></div>
+          <div><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">play_arrow</i></button></div>
+          <div><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">skip_next</i></button></div>
+        </div>
+        <div id="speed-slider">
+          <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+        </div>
 
-	<div class="box controls" id='Controls'>
-        <div class="subtitle" id="Control_text">Controls</div>
-        <form action="">
-          <input type="button" class="btn btn-2 btn-2b" value=&#9654; id="ticker" title="Run Simulation one Step at a time" />
-	  <input type="button" class="btn btn-2 btn-2b" value=&#9654;&#9654; id="Run" title="Run Simulation until paused" />
-          <input type="button" class="btn btn-2 btn-2b" value=&#9646;&#9646; id="Pause" title="Pause Simulation" />
-          <input type="button" class="btn btn-2 btn-2b" value=&#8592 id="Undo" title="Undo until last user modification" />
-	  <input type="button" class="btn btn-2 btn-2b" value="Reset" id="Reset" title="Sets all cells on board to dead" />
-	  <input type="button" class="btn btn-2 btn-2b" id="clear-selected" value="Clear Selected" title="Sets Selected Cells to Dead" /> 
-        </form>
-	</div>
-      	<div id="speed_slider" class="slidecontainer" >
-		<text id="speed_slider_text">Simulation Speed</text>
-        	<input type="range" min="1" max="100" value="50" class="slider" id="speed_range" title="Sets speed of simulation"/>
-		<output id="speed_slider_output"></output>
-	</div>
-
-
-	<div class="box controls">
-        <div class="subtitle" id="grid_settings_text">Grid Settings</div>
-        <form id="grid settings" action="">
-          <input type="button" class="btn btn-2 btn-2b" value="Set Colors" id="set_colors" title="Set Colors of different types of cells" />
-          <input type="button" class="btn btn-2 btn-2b" value="Set Cell Dead" id="set_dead" title="All cells that are clicked in this mode turn dead" />
-          <input type="button" class="btn btn-2 btn-2b" value="Set Cell Alive" id="set_alive" title="All cells that are clicked in this mode turn alive" />
-          <input type="button" class="btn btn-2 btn-2b" value="Set Cell Fixed Dead" id="set_fixed_dead" title="All cells that are clicked in this mode turn fixed dead" />
-	  <input type="button" class="btn btn-2 btn-2b" value="Set Cell Fixed Alive" id="set_fixed_alive" title="All cells that are clicked in this mode turn fixed alive" />
-	  <input type="button" class="btn btn-2 btn-2b" value="Set Grid Dimension" id="set_grid_dimension" title="Set the dimension of the grid"/>
-        </form>
-	</div>
-
-	<div class="box controls">
-        <div class="subtitle" id="extra_settings_text">Extra Settings
-	<select class="langSelector" id="Language_Select" title="Select Language">
-	  <option data-i18n="engOption" id="engOption" value="en">English</option>
-	  <option data-i18n="gerOption" id="gerOption" value="de">German</option>
-	</select>
-
-      	<div id="size_slider" class="slidecontainer" >
-		<text id="cell_slier_text">Cell Size</text>
-        	<input type="range" min="30" max="100" value="50" class="slider" id="cell_size" title="Sets the size of the blocks"/>
-		<output id="cell_size_output"></output>
-	</div>
-
-	</div>
-
-</div>
-
-
-    <link rel="stylesheet" type="text/css" href="index.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="bundle.js"></script>
-    <script type="text/javascript" src="cell.js"></script>
-
+      </div>
+      <div id="box2">
+        <div class="mid-slider">
+          <span><i class="material-icons md-30">photo_size_select_small</i></span>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+        </div>
+        <div class="mid-slider">
+          <span><i class="material-icons md-30">grid_on</i></span>
+          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+        </div>
+      </div>
+      <div id="box3"></div>
+    </div>
   </body>
+  <script type="text/javascript" src="js/cell.js"></script>
+  <script src="js/modernizr.custom.js"></script>
+
 </html>

@@ -1,14 +1,15 @@
-const MIN_DIM = 30;
+const MIN_DIM = 10;
 const MAX_DIM = 100;
 const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
 
-
+var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["grey", "brown", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
+//TODO: stop RESIZING AFTER CERTAIN SIZE;
 
 function cellUniverse() {
     this.leftBound = 0;
@@ -16,9 +17,6 @@ function cellUniverse() {
 
     this.rightBound = 0; //TODO: Calculate rightBound
     this.bottomBound = 0; //TODO: Calculate bottomBound
-
-    // Value of simulation speed
-    this.speed = 0;
 
     this.generateCells = function () {
         for (var i = 0; i <= this.bottomBound; i++) {
@@ -111,6 +109,9 @@ function Cell(y, x) {
     this.yCoordinate = y;
     this.xCoordinate = x;
     this.isSelected = false;
+    this.cellState = []; 
+
+
 
 
     /*****Getters*****/
@@ -238,6 +239,7 @@ function Cell(y, x) {
     }
 
     this.tick = function () {
+        this.cellState[ROUND_NUM - 1] = this.getIsAlive();
         this.setIsAlive(this.isAliveNextRound);
         this.updateAppearance();
     }
@@ -270,21 +272,20 @@ function demo() {
 
 function tick() {
     clearSelected();
+    ROUND_NUM++;
     world.tick();
 }
 
 function changeSize() {
-    var newSize = document.getElementById("cell_size").value;
-    console.log(newSize)
+    var newSize = document.getElementById("size").value;
     world.resize(newSize); //add button disable
 }
 
 var finishedResizing;
 
 function windowResize() {
-    //clearTimeout(finishedResizing); //assures that resizing doesnt happen to quickly.
-    //finishedResizing = setTimeout(function(){ world.resize(CELL_DIMENSION) }, RESIZE_TIME_DELAY); //only resizes after 10 milliseconds of not resizing
-    world.resize(CELL_DIMENSION)
+    clearTimeout(finishedResizing); //assures that resizing doesnt happen to quickly.
+    finishedResizing = setTimeout(function(){ world.resize(CELL_DIMENSION) }, RESIZE_TIME_DELAY); //only resizes after 10 milliseconds of not resizing
 }
 
 function clearSelected() {
@@ -371,7 +372,6 @@ function isCellInBounds(y, x) {
     return true;
 }
 
-
 function makeOpaqueGradient(gradientType, color) {
     color = color.substring(color.indexOf('(') + 1, color.indexOf(')'));
     color = color.split(',');
@@ -380,35 +380,11 @@ function makeOpaqueGradient(gradientType, color) {
 }
 var world = new cellUniverse();
 world.resize(CELL_DIMENSION);
-document.getElementById("ticker").addEventListener("click", tick);
-document.getElementById("clear-selected").addEventListener("click", clearSelected);
+//document.getElementById("ticker").addEventListener("click", tick);
+//document.getElementById("size").defaultValue = CELL_DIMENSION;
+//document.getElementById("confirm-size").addEventListener("click", changeSize);
+//document.getElementById("clear-selected").addEventListener("click", clearSelected);
 
-//document.getElementById("cell_size").defaultValue = CELL_DIMENSION;
-
-// Wrapper - Getting block size from slider
-document.getElementById("cell_size").oninput = function() {
-   changeSize();
-}
-
-// Wrapper to get speed from speed slider
-document.getElementById("speed_range").oninput = function() {
-    getSpeed_slider();
-};
-
-// Gets value from speed slider
-function getSpeed_slider() {
-   var speed = document.getElementById("speed_range").value //gets the oninput value
-   world.speed = speed;
-   console.log(speed)
-}
-
-/*
-let navWrapper = document.querySelector('.nav-wrapper'), navToogler =  document.querySelector('.nav-toogler')
-
-navToogler.addEventListener('click', function (event) {
-	navWrapper.classList.toggle('active')
-})
-*/
 
 /*var td = document.getElementsByTagName("td");
 
@@ -419,6 +395,43 @@ for (var i = 0; i < td.length; i++) {
   }
 }
 */
+
+
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+  
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+  
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+  
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+
+function changeLanguage(lang) {
+    console.log("language: " + lang);
+}
+
+  document.getElementById('english-sel').onchange = function() {
+      changeLanguage('en');
+  }
+  
+  document.getElementById('german-sel').onchange = function() {
+    changeLanguage('ge');
+}
+
+
 
 
 demo();

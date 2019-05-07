@@ -1,0 +1,296 @@
+html, body {
+  margin: 0px !important;  
+}
+#top-panel {
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  margin: 0px;
+  text-align: center;
+  border: solid green 1px;
+}
+
+#title-box {
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  border: solid purple 1px;
+  left: 0px;
+}
+
+#top-box {
+  position: absolute;
+  height: 100%;
+  width: 40%;
+  border: solid purple 1px;
+  right: 0px;
+}
+
+#main {
+  position: absolute;
+  width: 96%;
+  left: 2%;
+  height: 70%;
+  top: 15%;
+  margin: 0px;
+  background-color: rgb(236, 208, 208);
+}
+
+#bottom-panel {
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  bottom: 0%;
+  border: solid green 1px;
+}
+
+#box1 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 33.333%;
+  height: 100%;
+  left: 0%;
+  border: solid red 1px;
+
+}
+#box2 {
+  position: absolute;
+  width: 33.333%;
+  height: 100%;
+  left: 33.333%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: solid red 1px;
+}
+#box3 {
+  position: absolute;
+  width: 33%;
+  height: 100%;
+  right: 0%;
+  border: solid red 1px;
+}
+
+
+.mid-slider {
+  display: flex;
+  align-content: center;
+}
+
+.control-btn {
+  width: 60px;
+  height: 35px;
+  margin-top: 5px;
+
+}
+
+.material-icons.md-30 { 
+  font-size: 25px; 
+  color: darkgray;
+}
+#cell-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: grey;
+  margin: 0px;
+}
+
+td:hover {
+  transition: opacity .001s;
+  opacity: .3;
+  z-index: 2;
+}
+
+
+.btn {
+	background: none;
+	cursor: pointer;
+  text-transform: uppercase;
+  position: absolute;
+	letter-spacing: 1px;
+	outline: none;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	z-index: 0;
+}
+
+.btn:after {
+  content: '';
+  position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-1 {
+	border: 3px solid darkgray;
+	color: darkgray;
+}
+
+.btn-1d {
+	overflow: hidden;
+}
+
+.btn-1d:after {
+	width: 0;
+	height: 103%;
+	top: 50%;
+	left: 50%;
+	background: darkgray;
+	opacity: 0;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.btn-1d:hover,
+.btn-1d:active {
+	color: white;
+}
+
+
+.btn-1d:hover:after {
+	width: 70%;
+	opacity: 1;
+}
+
+.btn-1d:active:after {
+	width: 101%;
+	opacity: 1;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between ;
+  width: 70%;
+  height: 50%;
+ }
+
+ .iconify { 
+   width: 28px; 
+   height: 28px; 
+   color: darkgray;
+  }
+
+.info-icons {
+  width: 15px;
+  height: 15px;
+  color: red;
+}
+
+
+  .tab {
+    float: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+    width: 10%;
+    height: 100%;
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+    display: block;
+    box-sizing: border-box;
+    background-color: inherit;
+    color: black;
+    padding: 0px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+    box-sizing: border-box;
+  }
+  
+  /* Create an active/current "tab button" class */
+  .tab button.active {
+    background-color: #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+    float: left;
+    text-align: center;
+    top: 0px;
+    padding: 0px;
+    margin: 0px;
+    width: 90%;
+    height: 100%;
+    font-family: 'Roboto';
+
+  }
+
+ul {
+  text-align: left;
+  list-style: none;
+  padding-left: 0;
+}
+
+#how-to {
+  font-size: 1.75vh;
+}
+
+
+#game-stats {
+  text-align: center;
+}
+
+.form-radio
+{
+     -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+     display: inline-block;
+     position: relative;
+     background-color: #f1f1f1;
+     color: #666;
+     top: 10px;
+     height: 30px;
+     width: 30px;
+     border: 0;
+     border-radius: 50px;
+     cursor: pointer;     
+     margin-right: 7px;
+     outline: none;
+}
+.form-radio:checked::before
+{
+     position: absolute;
+     font: 13px/1 'Open Sans', sans-serif;
+     left: 11px;
+     top: 7px;
+     content: '\02143';
+     transform: rotate(40deg);
+}
+.form-radio:hover
+{
+     background-color: #f7f7f7;
+}
+.form-radio:checked
+{
+     background-color: #f1f1f1;
+}
+label
+{
+     font: 15px/1.7 'Open Sans', sans-serif;
+     color: #333;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     cursor: pointer;
+} 
