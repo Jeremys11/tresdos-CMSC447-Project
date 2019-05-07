@@ -2,5 +2,14 @@
     "title": "Conway's Game of Life",
     "change-language-title": "Language",
     "engOption": "English",
-    "gerOption": "German"
+    "gerOption": "German",
+    "game-stats": "Game Stats",
+    "alive": "Alive",
+    "dead": "Dead",
+    "how-to-title": "How to Play",
+    "Ht-line1":"A live cell with fewer than two live neighbours dies by underpopulation.",
+    "Ht-line2":"A live cell with two/three live neighbours lives on to the next generation.",
+    "Ht-line3":"A live cell more than three live neighbours dies by overpopulation.",
+    "Ht-line4":"A dead cell with three live neighbours becomes a live cell by reproduction.",
+    "Ht-line5":"A fixed cell will stay their type no matter what their neighbors are."
 }
