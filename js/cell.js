@@ -9,7 +9,15 @@ var selectedCells = [];
 var cellGrid = [];
 var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
+
+
 //TODO: stop RESIZING AFTER CERTAIN SIZE;
+
+var numAlive = 0;
+var numDead = 0;
+var numFixedAlive = 0;
+var numFixedDead = 0;
+
 
 function cellUniverse() {
     this.leftBound = 0;
@@ -19,6 +27,7 @@ function cellUniverse() {
     this.bottomBound = 0; //TODO: Calculate bottomBound
 
     this.generateCells = function () {
+        resetCounter();
         for (var i = 0; i <= this.bottomBound; i++) {
             if (cellGrid[i] == undefined) cellGrid.push([]);
             for (var j = 0; j <= this.rightBound; j++) {
@@ -27,7 +36,9 @@ function cellUniverse() {
                     cellGrid[i][j].setIsAlive(false);
                 }
                 cellGrid[i][j].updateAppearance();
-            }
+                countCell(i, j);
+            } 
+            updateCounter();
         }
     }
 
@@ -40,6 +51,9 @@ function cellUniverse() {
         for (var i = 0; i <= this.bottomBound; i++) {
             for (var j = 0; j <= this.rightBound; j++) {
                 cellGrid[i][j].tick();
+                
+                
+
             }
         }
     }
@@ -50,7 +64,7 @@ function cellUniverse() {
 
         var numRows = this.bottomBound;
         var numCols = this.rightBound;
-
+     
         for (var i = 0; i <= numRows; i++) {
             tableGrid.insertRow();
             var gridRow = tableGrid.rows[i];
@@ -61,10 +75,11 @@ function cellUniverse() {
                 gridRow.cells[j].onclick = function (e) {
                     selectCell(this.id)
                 }
+                
             }
         }
 
-        
+       
     }
 
     this.resize = function (newDim) {
@@ -99,8 +114,29 @@ function cellUniverse() {
     }
 }
 
+function resetCounter() {
+    numAlive = 0;
+    numDead = 0;
+    numFixedAlive = 0;
+    numFixedDead = 0;
+}
 
+function updateCounter() {
+    document.getElementById("alive-text").innerText = numAlive;
+    document.getElementById("dead-text").innerText = numDead;
+}
+function countCell(y, x) {
+    var cell = cellGrid[y][x];
+    if(cell.getIsAlive() == true) {
+        numAlive++;
+        if(cell.isFixed == true) numFixedAlive++;
+    }
 
+    else {
+        numDead++;
+        if(cell.isFixed == true) numFixedDead++; 
+    }
+}
 
 function Cell(y, x) {
     this.isAlive = true;
@@ -378,23 +414,7 @@ function makeOpaqueGradient(gradientType, color) {
     var gradient = gradientType + "-gradient(rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + "0), rgba(" + color[0] + "," + color[1] + "," + color[2] + ",1))";
     return gradient;
 }
-var world = new cellUniverse();
-world.resize(CELL_DIMENSION);
-//document.getElementById("ticker").addEventListener("click", tick);
-//document.getElementById("size").defaultValue = CELL_DIMENSION;
-//document.getElementById("confirm-size").addEventListener("click", changeSize);
-//document.getElementById("clear-selected").addEventListener("click", clearSelected);
 
-
-/*var td = document.getElementsByTagName("td");
-
-for (var i = 0; i < td.length; i++) {
-  td[i].onclick = function() {
-        this.style.fontWeight = "bold";
-        console.log("opo");
-  }
-}
-*/
 
 
 function openCity(evt, cityName) {
@@ -419,20 +439,9 @@ function openCity(evt, cityName) {
   }
 
 
-function changeLanguage(lang) {
-    console.log("language: " + lang);
-}
 
-  document.getElementById('english-sel').onchange = function() {
-      changeLanguage('en');
-  }
-  
-  document.getElementById('german-sel').onchange = function() {
-    changeLanguage('ge');
-}
-
-
-
+var world = new cellUniverse();
+world.resize(CELL_DIMENSION);
 
 demo();
 
