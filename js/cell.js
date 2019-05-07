@@ -51,9 +51,6 @@ function cellUniverse() {
         for (var i = 0; i <= this.bottomBound; i++) {
             for (var j = 0; j <= this.rightBound; j++) {
                 cellGrid[i][j].tick();
-                
-                
-
             }
         }
     }
@@ -64,7 +61,6 @@ function cellUniverse() {
 
         var numRows = this.bottomBound;
         var numCols = this.rightBound;
-     
         for (var i = 0; i <= numRows; i++) {
             tableGrid.insertRow();
             var gridRow = tableGrid.rows[i];
@@ -417,7 +413,7 @@ function makeOpaqueGradient(gradientType, color) {
 
 
 
-function openCity(evt, cityName) {
+function openTab(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
   
