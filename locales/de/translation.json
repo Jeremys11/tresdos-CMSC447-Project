@@ -1,6 +1,7 @@
 {
     "title": "Conways Spiel des Lebens",
-    "currLang": "Current Language is German",
+    "change-language-title":"Sprache",
     "engOption": "Englisch",
-    "gerOption": "Deutsche"
+    "gerOption": "Deutsche",
+    
 }
