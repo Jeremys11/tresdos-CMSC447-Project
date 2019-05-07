@@ -24,19 +24,19 @@
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" onclick="openCity(event, 'game-stats-title')"><span class="iconify info-icons"
+          <div> <button class="tablinks" onclick="openTab(event, 'game-stats-title')"><span class="iconify info-icons"
                 data-icon="whh:statistics" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openCity(event, 'change-language')"><span class="iconify info-icons"
+          <div> <button class="tablinks" onclick="openTab(event, 'change-language')"><span class="iconify info-icons"
                 data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openCity(event, 'how-to')"><span class="iconify info-icons"
+          <div> <button class="tablinks" onclick="openTab(event, 'how-to')"><span class="iconify info-icons"
                 data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
         </div>
 
         <div id="game-stats-title" class="tabcontent">
           <span id="game-stats" class="tab-title"><u>Game Stats</u></span>
           <ul>
-            <li>Alive: 10</li>
-            <li>Dead: 20</li>
+            <li>Alive: <span id="alive-text"></span></li>
+            <li>Dead: <span id="dead-text"></span></li>
           </ul>
         </div>
 
