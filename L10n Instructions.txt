@@ -3,3 +3,5 @@ get jquery from CDN in index.html
 
 include my bundle in index.html
 <script src="bundle.js"></script>
+
+Language Options need to be given by a select object with class="langSelector"
