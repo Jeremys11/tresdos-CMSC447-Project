@@ -20,7 +20,7 @@ $(document).ready(function(){
             "debug": true,
             "fallbackLng" : 'en',
             backend: {
-                loadPath: 'https://jeremys11.github.io/tresdos-CMSC447-Project/locales/{{lng}}/{{ns}}.json'
+                loadPath: '{{lng}}/{{ns}}.json'
             }
         },
         function(err,t){
