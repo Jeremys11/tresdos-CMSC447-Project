@@ -4,9 +4,9 @@
     "engOption": "English",
     "gerOption": "German",
     "game-stats": "Game Stats",
-    "Ht-line1": "A live cell with fewer than two live neighbours dies by underpopulation.",
-    "Ht-line2": "A live cell with two/three live neighbours lives on to the next generation.",
-    "Ht-line3": "A live cell more than three live neighbours dies by overpopulation.",
-    "Ht-line4": "A dead cell with three live neighbours becomes a live cell by reproduction.",
-    "Ht-line5": "A fixed cell will stay their type no matter what their neighbors are."
+    "htLineOne": "A live cell with fewer than two live neighbours dies by underpopulation.",
+    "htLineTwo": "A live cell with two/three live neighbours lives on to the next generation.",
+    "htLineThree": "A live cell more than three live neighbours dies by overpopulation.",
+    "htLineFour": "A dead cell with three live neighbours becomes a live cell by reproduction.",
+    "htLineFive": "A fixed cell will stay their type no matter what their neighbors are."
 }

@@ -4,9 +4,9 @@
     "engOption": "Englisch",
     "gerOption": "Deutsche",
     "game-stats": "Spielstatistik",
-    "Ht-line1": "Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt durch Unterbevölkerung.",
-    "Ht-line2": "Eine lebende Zelle mit zwei oder drei lebenden Nachbarn lebt bis zur nächsten Generation.",
-    "Ht-line3": "Eine lebende Zelle, die mehr als drei lebende Nachbarn ist, stirbt durch Überbevölkerung.",
-    "Ht-line4": "Eine tote Zelle mit drei lebenden Nachbarn wird durch Wiedergabe zu einer lebenden Zelle.",
-    "Ht-line5": "Eine feste Zelle bleibt unabhängig von ihren Nachbarn."
+    "htLineOne": "Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt durch Unterbevölkerung.",
+    "htLineTwo": "Eine lebende Zelle mit zwei oder drei lebenden Nachbarn lebt bis zur nächsten Generation.",
+    "htLineThree": "Eine lebende Zelle, die mehr als drei lebende Nachbarn ist, stirbt durch Überbevölkerung.",
+    "htLineFour": "Eine tote Zelle mit drei lebenden Nachbarn wird durch Wiedergabe zu einer lebenden Zelle.",
+    "htLineFive": "Eine feste Zelle bleibt unabhängig von ihren Nachbarn."
 }
