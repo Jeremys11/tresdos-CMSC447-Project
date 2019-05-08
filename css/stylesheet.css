@@ -22,7 +22,7 @@ html, body {
 #top-box {
   position: absolute;
   height: 100%;
-  width: 40%;
+  width: 50%;
   border: solid purple 1px;
   right: 0px;
 }
@@ -148,7 +148,7 @@ td:hover {
 
 
 .btn {
-	background: none;
+	background: rgb(255, 255, 255);
 	cursor: pointer;
   text-transform: uppercase;
   position: absolute;
@@ -221,9 +221,9 @@ td:hover {
   }
 
 .info-icons {
-  width: 15px;
-  height: 15px;
-  color: red;
+  width: 25px;
+  height: 25px;
+  color: rgb(0, 0, 0);
 }
 
 
@@ -354,7 +354,7 @@ label
   /* Position the tooltip */
   position: absolute;
   right: 75%;
-  top: 20%;
+  top: 30%;
   z-index: 1;
 }
 
