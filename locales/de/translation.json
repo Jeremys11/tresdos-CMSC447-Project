@@ -7,9 +7,20 @@
     "how-to-title": "Spielanleitungra",
     "alive": "Leben: ",
     "dead": "Tot",
+    "fixed-alive": "Lebendig behoben",
+    "fixed-dead": "Tot behoben",
     "htLineOne": "Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt durch Unterbevölkerung.",
     "htLineTwo": "Eine lebende Zelle mit zwei oder drei lebenden Nachbarn lebt bis zur nächsten Generation.",
     "htLineThree": "Eine lebende Zelle, die mehr als drei lebende Nachbarn ist, stirbt durch Überbevölkerung.",
     "htLineFour": "Eine tote Zelle mit drei lebenden Nachbarn wird durch Wiedergabe zu einer lebenden Zelle.",
-    "htLineFive": "Eine feste Zelle bleibt unabhängig von ihren Nachbarn."
+    "htLineFive": "Eine feste Zelle bleibt unabhängig von ihren Nachbarn.",
+    "cell-slider": "Zellengröße einstellen",
+    "grid-slider": "Legen Sie die Rastergröße fest",
+    "restore-tip": "Rückgängig machen",
+    "step-tip": "Einen Simulationsschritt ausführen",
+    "run-tip": "Simulation abspielen oder pausieren",
+    "clear-tip": "Setzt alle Zellen auf tot",
+    "alive-stat-tip": "Leben (Lebendig behoben)",
+    "dead-stat-tip": "Tot (Tot behoben)",
+    "colors": "Farben"
 }

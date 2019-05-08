@@ -6,6 +6,7 @@ html, body {
   width: 96%;
   height: 15%;
   margin: 0px;
+  right: 2%;
   text-align: center;
   border: solid green 1px;
 }
@@ -41,6 +42,7 @@ html, body {
   width: 96%;
   height: 15%;
   bottom: 0%;
+  right: 2%;
   border: solid green 1px;
 }
 
@@ -86,6 +88,26 @@ html, body {
   margin-top: 5px;
 
 }
+
+/*
+.control-btn .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+
+  position: absolute;
+  z-index: 1;
+}
+
+.control-btn:hover .tooltiptext {
+  visibility: visible;
+}
+*/
 
 .material-icons.md-30 { 
   font-size: 25px; 
@@ -320,6 +342,25 @@ label
   display: inline-block;
 }
 
+.mid-slider .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 75%;
+  top: 20%;
+  z-index: 1;
+}
+
+.mid-slider:hover .tooltiptext {
+  visibility: visible;
+}
 
 .tooltip .tooltiptext {
   visibility: hidden;
