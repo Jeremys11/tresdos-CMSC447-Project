@@ -4,8 +4,6 @@
     "engOption": "English",
     "gerOption": "German",
     "game-stats": "Game Stats",
-    "alive": "Alive: ",
-    "dead": "Dead: ",
     "how-to-title": "How to Play",
     "Ht-line1": "A live cell with fewer than two live neighbours dies by underpopulation.",
     "Ht-line2": "A live cell with two/three live neighbours lives on to the next generation.",

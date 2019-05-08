@@ -4,8 +4,6 @@
     "engOption": "Englisch",
     "gerOption": "Deutsche",
     "game-stats": "Spielstatistik",
-    "alive": "Lebendig",
-    "dead": "Tot",
     "how-to-title": "Spielanleitung",
     "Ht-line1": "Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt durch Unterbevölkerung.",
     "Ht-line2": "Eine lebende Zelle mit zwei oder drei lebenden Nachbarn lebt bis zur nächsten Generation.",
