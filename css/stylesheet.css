@@ -102,7 +102,6 @@ html, body {
 
   /* Position the tooltip */
   position: absolute;
-  right: 100%;
   z-index: 1;
 }
 
