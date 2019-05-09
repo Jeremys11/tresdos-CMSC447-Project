@@ -1,5 +1,6 @@
 html, body {
   margin: 0px !important;  
+  font-family: "Roboto" !important;
 }
 #top-panel {
   position: absolute;
@@ -320,7 +321,7 @@ ul {
 }
 
 #how-to {
-  font-size: 1.75vh;
+  font-size: 1.5vh;
 }
 
 
@@ -375,7 +376,21 @@ label
 
 
 
-
+ #box3 > button {
+  background: rgb(255, 255, 255);
+	cursor: pointer;
+  text-transform: uppercase;
+  
+	letter-spacing: 1px;
+	outline: none;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+  z-index: 0;
+  
+  border: 3px solid darkgray;
+	color: darkgray;
+ }
 
 #colorSelBox {
   margin-top: 30px;

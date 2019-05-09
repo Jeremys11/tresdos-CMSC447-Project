@@ -1,5 +1,5 @@
 const MIN_DIM = 9;
-const MAX_DIM = 150;
+const MAX_DIM = 100;
 const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
@@ -278,7 +278,21 @@ function cellUniverse() {
         this.generateCells();
         
     }
-
+    this.reverseTick = function() {
+        if(ROUND_NUM == 0) {
+            return;
+        }
+        document.getElementById('restore-btn').disabled = true;
+        ROUND_NUM--;
+        for (var i = 0; i <= this.bottomBound; i++) {
+            for (var j = 0; j <= this.rightBound; j++) {
+                cellGrid[i][j].reverseTick(ROUND_NUM);
+            
+            }
+            this.generateCells();
+        } 
+        document.getElementById('restore-btn').disabled = false;
+    }
     this.updateBounds = function () {
         leftPadding = CELL_DIMENSION;
         topPadding = CELL_DIMENSION;
@@ -466,8 +480,8 @@ function Cell(y, x) {
             this.isFixed = false;
         }
         else {
-            this.isAlive = cellState[oldRoundNum][0];
-            this.isFixed = cellState[oldRoundNum][1];
+            this.isAlive = this.cellState[oldRoundNum][0];
+            this.isFixed = this.cellState[oldRoundNum][1];
         }
 
         this.updateAppearance();
@@ -514,9 +528,19 @@ function resetCounter() {
 }
 
 function updateCounter() {
-    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
-    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
+    if(document.getElementById('langNow').value === "de" ) {
+        document.getElementById("alive-text").innerText = "Leben: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Tot: " + numDead + " (" + numFixedDead + ")";
+    }
+    else {
+        document.getElementById("alive-text").innerText = "Alive: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Dead: " + numDead + " (" + numFixedDead + ")";
+    }
+    
 }
+
+document.getElementById('langNow').addEventListener('change', updateCounter);
+
 function countCell(y, x) {
     var cell = cellGrid[y][x];
     if (cell.getIsAlive() == true) {
@@ -573,6 +597,7 @@ function myFunction(e) {
 }
 
 function reverseTick() {
+    world.reverseTick();
 
 }
 
