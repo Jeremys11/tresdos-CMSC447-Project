@@ -278,7 +278,19 @@ function cellUniverse() {
         this.generateCells();
         
     }
-
+    this.reverseTick = function() {
+        if(ROUND_NUM == 0) {
+            return;
+        }
+        ROUND_NUM--;
+        for (var i = 0; i <= this.bottomBound; i++) {
+            for (var j = 0; j <= this.rightBound; j++) {
+                cellGrid[i][j].reverseTick(ROUND_NUM);
+            
+            }
+            this.generateCells();
+        } 
+    }
     this.updateBounds = function () {
         leftPadding = CELL_DIMENSION;
         topPadding = CELL_DIMENSION;
@@ -466,8 +478,8 @@ function Cell(y, x) {
             this.isFixed = false;
         }
         else {
-            this.isAlive = cellState[oldRoundNum][0];
-            this.isFixed = cellState[oldRoundNum][1];
+            this.isAlive = this.cellState[oldRoundNum][0];
+            this.isFixed = this.cellState[oldRoundNum][1];
         }
 
         this.updateAppearance();
@@ -573,6 +585,7 @@ function myFunction(e) {
 }
 
 function reverseTick() {
+    world.reverseTick();
 
 }
 
