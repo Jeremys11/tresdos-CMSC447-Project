@@ -11,7 +11,8 @@
   <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
+  <script src="js/jscolor.js"></script>
+  <script src="https://unpkg.com/canvas-datagrid"></script>
 
 </head>
 
@@ -66,7 +67,7 @@
     </div>
 
     <div id="main">
-      <table id="cell-grid"></table>
+      
     </div>
     <div id="bottom-panel">
       <div id="box1">
@@ -94,7 +95,12 @@
           <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
         </div>
       </div>
-      <div id="box3"></div>
+      <div id="box3">
+      	<button class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'ffcc00'}" id="aliveColor">Alive</button>
+		<button class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'ffcc00'}" id="deadColor">Dead</button>
+		<button class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'ffcc00'}" id="fAliveColor">Fixed Alive</button>
+		<button class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'ffcc00'}" id="fDeadColor">Fixed Dead</button>
+      </div>
     </div>
   </body>
   <script type="text/javascript" src="js/cell.js"></script>

@@ -3,15 +3,20 @@ const MAX_DIM = 100;
 const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
+var PADDING = 10;
 
 var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "yellow", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "grey", "rgba(10, 10, 10, 0)", "grey"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+
 
 
 var playState = false;
 var tick_freq = 1000 //1 second default
+
+const MAKE_OPAQUE_SIG = 15;
+const REMOVE_OPAQUE_SIG = 16;
 
 
 //TODO: stop RESIZING AFTER CERTAIN SIZE;
@@ -21,6 +26,27 @@ var numDead = 0;
 var numFixedAlive = 0;
 var numFixedDead = 0;
 
+
+//Emily's color updating function
+function updateDead(picker){
+    var newColor = picker.toRGBString();
+    COLORS[0] = newColor;
+}
+
+function updateAlive(picker){
+    var newColor = picker.toRGBString();
+    COLORS[1] = newColor;
+}
+
+function updateFDead(picker){
+    var newColor = picker.toRGBString();
+    COLORS[2] = newColor;
+}
+
+function updateFAlive(picker){
+    var newColor = picker.toRGBString();
+    COLORS[3] = newColor;
+}
 
 function cellUniverse() {
     this.leftBound = 0;
@@ -41,8 +67,9 @@ function cellUniverse() {
                 cellGrid[i][j].updateAppearance();
                 countCell(i, j);
             } 
-            updateCounter();
+            
         }
+        updateCounter();
     }
 
     this.tick = function () {
@@ -58,28 +85,44 @@ function cellUniverse() {
         }
     }
 
-    this.generateTable = function () {
-        var tableGrid = document.getElementById(CELL_GRID_ID); //GENERATE TABLE SHOULD DECIDE ROWS/COLS
-        tableGrid.innerHTML = "";
+    this.generateGrid = function (){
+        console.log("a")
+        var bw = document.getElementById('main').offsetWidth;
+        var bh = document.getElementById('main').offsetHeight;
+        //padding around grid
+        var p = 10;
+        //size of canvas
+        var cw = bw + (p*2) + 1;
+        var ch = bh + (p*2) + 1;
 
-        var numRows = this.bottomBound;
-        var numCols = this.rightBound;
-        for (var i = 0; i <= numRows; i++) {
-            tableGrid.insertRow();
-            var gridRow = tableGrid.rows[i];
-            for (var j = 0; j <= numCols; j++) {
-                gridRow.insertCell();
-                gridRow.cells[j].id = i + "!" + j;
+        var canvasGrid = document.getElementById(CELL_GRID_ID);
+        canvasGrid.setAttribute("width", cw);
+        canvasGrid.setAttribute("height", ch);
 
-                gridRow.cells[j].onclick = function (e) {
-                    selectCell(this.id)
-                }
-                
-            }
+        var evenWidth = bw - (bw % CELL_DIMENSION)
+        var evenHeight = bh - (bh % CELL_DIMENSION)
+
+        var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
+        var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
+
+        var context = canvasGrid.getContext("2d");
+        for (var x = 0; x <= evenWidth; x += CELL_DIMENSION) {
+            context.moveTo(0.5 + x + WIDTH_PAD, HEIGHT_PAD);
+            context.lineTo(0.5 + x + WIDTH_PAD, evenHeight + HEIGHT_PAD);
         }
 
-       
+
+        for (var x = 0; x <= evenHeight; x += CELL_DIMENSION) {
+            context.moveTo(WIDTH_PAD, 0.5 + x + HEIGHT_PAD);
+            context.lineTo(evenWidth + WIDTH_PAD, 0.5 + x + HEIGHT_PAD);
+            }
+
+        context.strokeStyle = "black";
+        context.stroke();
     }
+
+
+
 
     this.resize = function (newDim) {
         if (newDim > MAX_DIM) {
@@ -92,15 +135,15 @@ function cellUniverse() {
         }
         CELL_DIMENSION = newDim;
         this.updateBounds();
-        this.generateTable();
+        this.generateGrid();
         this.generateCells();
         generateSelectedCells();
     }
 
     this.updateBounds = function () {
-        var tableGrid = document.getElementById(CELL_GRID_ID);
-        var gridHeight = tableGrid.offsetHeight;
-        var gridWidth = tableGrid.offsetWidth;
+        var canvasGrid = document.getElementById(CELL_GRID_ID);
+        var gridHeight = canvasGrid.offsetHeight;
+        var gridWidth = canvasGrid.offsetWidth;
 
         var numRows = gridHeight / CELL_DIMENSION;
         var numCols = gridWidth / CELL_DIMENSION;
@@ -113,29 +156,6 @@ function cellUniverse() {
     }
 }
 
-function resetCounter() {
-    numAlive = 0;
-    numDead = 0;
-    numFixedAlive = 0;
-    numFixedDead = 0;
-}
-
-function updateCounter() {
-    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
-    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
-}
-function countCell(y, x) {
-    var cell = cellGrid[y][x];
-    if(cell.getIsAlive() == true) {
-        numAlive++;
-        if(cell.isFixed == true) numFixedAlive++;
-    }
-
-    else {
-        numDead++;
-        if(cell.isFixed == true) numFixedDead++; 
-    }
-}
 
 function Cell(y, x) {
     this.isAlive = true;
@@ -280,11 +300,11 @@ function Cell(y, x) {
     }
 
     this.getColor = function () { //refactor
-        if (this.isAlive() == true) {
-            if (this.isFixed() == true) return COLORS[3]; //alive and fixed
-            else return Colors[1]; //alive not fixed
+        if (this.isAlive == true) {
+            if (this.isFixed == true) return COLORS[3]; //alive and fixed
+            else return COLORS[1]; //alive not fixed
         }
-        else if (this.isFixed() == true) return COLORS[2]; //dead and fixed
+        else if (this.isFixed == true) return COLORS[2]; //dead and fixed
         else return COLORS[0]; //dead not fixed;
     }
 
@@ -304,6 +324,99 @@ function demo() {
     cellGrid[6][6].updateAppearance();
 
 }
+
+function resetCounter() {
+    numAlive = 0;
+    numDead = 0;
+    numFixedAlive = 0;
+    numFixedDead = 0;
+}
+
+function updateCounter() {
+    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
+    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
+}
+function countCell(y, x) {
+    var cell = cellGrid[y][x];
+    if(cell.getIsAlive() == true) {
+        numAlive++;
+        if(cell.isFixed == true) numFixedAlive++;
+    }
+
+    else {
+        numDead++;
+        if(cell.isFixed == true) numFixedDead++; 
+    }
+}
+
+function handleClick(e) {
+    var rect = document.getElementById(CELL_GRID_ID).getBoundingClientRect();
+    console.log(rect.left, e.x, "and", rect.top, e.y);
+    var x = e.x - rect.left;
+    var y = e.y - rect.top;
+
+    var bw = document.getElementById('main').offsetWidth;
+    var bh = document.getElementById('main').offsetHeight;
+
+    var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
+    var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
+
+    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
+    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
+    x = Math.floor(x);
+    y = Math.floor(y);
+    console.log(HEIGHT_PAD, WIDTH_PAD)  
+    console.log(y, x)
+    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+    
+    
+    updateCellAppearance(y, x, 4);
+
+    
+   
+    
+    return;
+    var c = document.getElementById(CELL_GRID_ID).getContext("2d");
+    c.fillStyle = "black";
+    
+    var boxSize = CELL_DIMENSION;
+    c.fillRect(Math.floor(e.offsetX / boxSize) * boxSize,
+      Math.floor(e.offsetY / boxSize) * boxSize,
+      boxSize, boxSize);
+  }
+
+
+  var lastHover = false;
+  function handleHover(e) { 
+    var rect = document.getElementById(CELL_GRID_ID).getBoundingClientRect();
+
+    var x = e.x - rect.left;
+    var y = e.y - rect.top;
+
+    var bw = document.getElementById('main').offsetWidth;
+    var bh = document.getElementById('main').offsetHeight;
+
+    var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
+    var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
+
+    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
+    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
+    x = Math.floor(x);
+    y = Math.floor(y);
+ 
+    hov = [y, x];
+
+    updateCellAppearance(lastHover[0], lastHover[1], 15, 0)
+   
+    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+    if(lastHover !== hov) updateCellAppearance(y, x, 15, .2);
+    lastHover = [y, x];
+}
+
+  //document.getElementById(CELL_GRID_ID).addEventListener('click', handleClick);
+  document.getElementById(CELL_GRID_ID).addEventListener('mousemove', handleHover);
+
+
 
 function tick() {
     clearSelected();
@@ -362,6 +475,7 @@ function removeCellFromSelected(index) {
 }
 
 function generateSelectedCells() {
+    return;
     var size = selectedCells.length;
     for (var i = 0; i < size; i++) {
         var id = selectedCells[i];
@@ -370,10 +484,22 @@ function generateSelectedCells() {
     }
 }
 
-function updateCellAppearance(y, x, status) {
-    var tableGrid = document.getElementById(CELL_GRID_ID);
-    tableGrid.rows[y].cells[x].style.backgroundColor = COLORS[status];
-}
+function updateCellAppearance(y, x, status, opacity) {
+
+    var canvasGrid = document.getElementById(CELL_GRID_ID);
+    var context = canvasGrid.getContext('2d');
+    var WIDTH_PAD = 10 + ((document.getElementById('main').offsetWidth % CELL_DIMENSION) / 2);
+    var HEIGHT_PAD = 10 + ((document.getElementById('main').offsetHeight % CELL_DIMENSION) / 2);
+    context.fillStyle = "white";
+    if(status === MAKE_OPAQUE_SIG) {
+        console.log("Fd")
+      context.fillStyle = "rgba(0, 0, 255, " + opacity;
+
+    }
+    else context.fillStyle = COLORS[status];
+    
+    context.fillRect((x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+}1
 
 function parseCellID(id) {
     return id.split('!');
@@ -486,7 +612,7 @@ function openTab(evt, cityName) {
 
   function changeSpeed() {
       var slider = document.getElementById('speed-slider');
-      console.log(slider.value);
+  
   }
 
 
