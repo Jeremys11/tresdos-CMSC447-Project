@@ -39,10 +39,10 @@
         </div>
 
         <div id="game-stats-title" class="tabcontent">
-          <ul class="tooltip">  
+          <ul class="tooltip-stat">  
             <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
-            <li>Alive: <span id="alive-text"></span></li>
-            <li>Dead: <span id="dead-text"></span></li>
+            <li id="alive-stat-text">Alive: <span id="alive-text"></span></li>
+            <li id="dead-stat-text">Dead: <span id="dead-text"></span></li>
           </ul>
         </div>
 
@@ -75,21 +75,21 @@
     <div id="bottom-panel">
       <div id="box1">
         <div class="flex-container">
-          <div class="tooltip"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+          <div class="tooltipButtonLeft"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">restore</i>
               </button>
               <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
             </div>
-          <div class="tooltip"><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
+          <div class="tooltipButtonLeft"><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">play_arrow</i></button>
                 <span data-i18n="run-tip" class="tooltiptext">Play or pause the simulation</span>    
           </div>
-          <div class="tooltip"><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
+          <div class="tooltipButtonLeft"><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">skip_next</i></button>
                 <span data-i18n="step-tip" class="tooltiptext">Run one step of simulation</span>
           </div>
         </div>
-        <div class="tooltip">
+        <div class="tooltipSliderLeft">
           <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
           <span data-i18n="speed" class="tooltiptext">Speed of simulation</span>
           <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider">
@@ -110,7 +110,9 @@
         </div>
       </div>
 
-      <div id="box3"></div>
+      <div id="box3">
+    
+      </div>
 
     </div>
   </body>

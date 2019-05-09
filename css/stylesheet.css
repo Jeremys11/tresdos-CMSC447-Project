@@ -76,6 +76,20 @@ html, body {
   border: solid red 1px;
 }
 
+#alive-text{
+  font-size: 30px;
+}
+
+#dead-text{
+  font-size: 30px;
+}
+
+#alive-stat-text{
+  font-size: 30px;
+}
+#dead-stat-text{
+  font-size: 30px;
+}
 
 .mid-slider {
   display: flex;
@@ -289,6 +303,7 @@ td:hover {
   
     /* Position the tooltip */
     position: absolute;
+    right: 10%;
     z-index: 1;
   }
 
@@ -395,5 +410,79 @@ label
 }
 
 .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+.tooltipButtonLeft {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipButtonLeft .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 70%;
+  z-index: 1;
+}
+
+.tooltipButtonLeft:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltipSliderLeft {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipSliderLeft .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  z-index: 1;
+}
+
+.tooltipSliderLeft:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip-stat {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-stat .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 100%;
+  z-index: 1;
+}
+
+.tooltip-stat:hover .tooltiptext {
   visibility: visible;
 }
