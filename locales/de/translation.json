@@ -22,5 +22,8 @@
     "clear-tip": "Setzt alle Zellen auf tot",
     "alive-stat-tip": "Leben (Lebendig behoben)",
     "dead-stat-tip": "Tot (Tot behoben)",
-    "colors": "Farben"
+    "colors": "Farben",
+    "speed": "Geschwindigkeit der Simulation",
+    "clear": "Löscht Board",
+    "stat-tip": "Anzahl der Zellen (Anzahl der festen Zellen)"
 }

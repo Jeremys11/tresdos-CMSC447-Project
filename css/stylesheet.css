@@ -89,7 +89,7 @@ html, body {
 
 }
 
-/*
+
 .control-btn .tooltiptext{
   visibility: hidden;
   width: 120px;
@@ -107,7 +107,7 @@ html, body {
 .control-btn:hover .tooltiptext {
   visibility: visible;
 }
-*/
+
 
 .material-icons.md-30 { 
   font-size: 25px; 

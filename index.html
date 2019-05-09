@@ -15,7 +15,6 @@
 
 </head>
 
-
 <body>
 
   <body onresize="windowResize()">
@@ -40,9 +39,9 @@
         </div>
 
         <div id="game-stats-title" class="tabcontent">
-          <span id="game-stats" class="tab-title"><u data-i18n="game-stats">Game Stats</u></span>
-          <ul>
-            <li>Alive:  <span id="alive-text"></span></li>
+          <ul class="tooltip">  
+            <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
+            <li>Alive: <span id="alive-text"></span></li>
             <li>Dead: <span id="dead-text"></span></li>
           </ul>
         </div>
@@ -54,7 +53,6 @@
               <option data-i18n="gerOption" value="de">German</option>
           </select>
 
-       
         </div>
 
         <div id="how-to" class="tabcontent">
@@ -77,16 +75,23 @@
     <div id="bottom-panel">
       <div id="box1">
         <div class="flex-container">
-          <div><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+          <div class="tooltip"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">restore</i>
-              </button></div>
-          <div><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
-                class="material-icons md-30">play_arrow</i></button></div>
-          <div><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
-                class="material-icons md-30">skip_next</i></button></div>
+              </button>
+              <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
+            </div>
+          <div class="tooltip"><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">play_arrow</i></button>
+                <span data-i18n="run-tip" class="tooltiptext">Play or pause the simulation</span>    
+          </div>
+          <div class="tooltip"><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">skip_next</i></button>
+                <span data-i18n="step-tip" class="tooltiptext">Run one step of simulation</span>
+          </div>
         </div>
-        <div >
+        <div class="tooltip">
           <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
+          <span data-i18n="speed" class="tooltiptext">Speed of simulation</span>
           <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider">
         </div>
 

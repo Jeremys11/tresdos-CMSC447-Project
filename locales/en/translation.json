@@ -22,5 +22,8 @@
     "clear-tip": "Sets all cells to dead",
     "alive-stat-tip": "Alive (Fixed Alive)",
     "dead-stat-tip": "Dead (Fixed Dead)",
-    "colors": "Colors"
+    "colors": "Colors",
+    "speed": "Speed of simulation",
+    "clear": "Clears board",
+    "stat-tip": "Number of cells (Number of fixed cells)"
 }
