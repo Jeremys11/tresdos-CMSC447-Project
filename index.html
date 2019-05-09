@@ -11,13 +11,26 @@
   <script src="https://code.iconify.design/1/1.0.2/iconify.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+   
   <script src="js/jscolor.js"></script>
   <script src="https://unpkg.com/canvas-datagrid"></script>
 
 </head>
 
 <body>
-
+    <script type="text/javascript">
+      if (document.addEventListener) { // IE >= 9; other browsers
+          document.addEventListener('contextmenu', function(e) {
+              alert("You've tried to open context menu"); //here you draw your own menu
+              e.preventDefault();
+          }, false);
+      } else { // IE < 9
+          document.attachEvent('oncontextmenu', function() {
+              alert("You've tried to open context menu");
+              window.event.returnValue = false;
+          });
+      }
+  </script>
   <body onresize="windowResize()">
     <div id="top-panel">
       <div id="title-box">
@@ -25,7 +38,7 @@
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" onclick="openTab(event, 'game-stats-title')"><span class="iconify info-icons"
+          <div> <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'game-stats')"><span class="iconify info-icons"
                 data-icon="whh:statistics" data-inline="false"></span></button></div>
           <div> <button class="tablinks" onclick="openTab(event, 'change-language')"><span class="iconify info-icons"
                 data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
@@ -33,8 +46,8 @@
                 data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
         </div>
 
-        <div id="game-stats-title" class="tabcontent">
-          <span id="game-stats" class="tab-title"><u>Game Stats</u></span>
+        <div id="game-stats" class="tabcontent">
+          <span id="game-stats-title" class="tab-title"><u>Game Stats</u></span>
           <ul>
             <li>Alive: <span id="alive-text"></span></li>
             <li>Dead: <span id="dead-text"></span></li>
@@ -65,10 +78,8 @@
       </div>
 
     </div>
-
+    
     <div id="main">
-      
-      <canvas id="hit-canvas"></canvas>
       <canvas id="cell-grid"></canvas>
     </div>
     <div id="bottom-panel">
@@ -83,30 +94,45 @@
         </div>
         <div >
           <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
-          <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider">
+          <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider" step="10">
         </div>
 
       </div>
       <div id="box2">
         <div class="mid-slider">
           <span><i class="material-icons md-30">photo_size_select_small</i></span>
-          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+          <input type="range" min="9" max="150" value="40" class="slider" id="size-slider">
         </div>
         <div class="mid-slider">
           <span><i class="material-icons md-30">grid_on</i></span>
-          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+          <input type="range" min="10" max="100" value="100" class="slider" id="grid-slider">
         </div>
       </div>
       <div id="box3">
-      	<button class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'ffcc00'}" id="aliveColor">Alive</button>
-		<button class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'ffcc00'}" id="deadColor">Dead</button>
-		<button class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'ffcc00'}" id="fAliveColor">Fixed Alive</button>
-		<button class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'ffcc00'}" id="fDeadColor">Fixed Dead</button>
+      	<button draggable="true" ondrag="myFunction(event)" class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'484848'}" id="aliveColor">Alive</button>
+		<button draggable="true" ondrag="myFunction(event)" class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'484848'}" id="deadColor">Dead</button>
+		<button draggable="true" ondrag="myFunction(event)" class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'484848'}" id="fAliveColor">Alive </button>
+    <button  draggable="true" ondrag="myFunction(event)" class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'484848'}" id="fDeadColor">Fixed Dead</button>
+  
+    <button  draggable="true" ondrag="myFunction(event)" class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'484848'}" id="Backgr">Grid</button>
+          <div id="swapbox">Selector
+        <select id="colorSelBox">
+            <option value="a">Alive</option>
+            <option value="b">Dead</option>
+            <option value="c">Fixed Alive</option>
+            <option value="d">Fixed Dead</option>
+          </select>
+    </div>
       </div>
     </div>
   </body>
+
   <script type="text/javascript" src="js/cell.js"></script>
   <script type="text/javascript" src="bundle.js"></script>
+ 
   <script src="js/modernizr.custom.js"></script>
-
+<script>
+      document.getElementById("defaultOpen").click();
+    
+    </script>
 </html>
