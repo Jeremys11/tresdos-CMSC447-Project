@@ -26,27 +26,223 @@ var numDead = 0;
 var numFixedAlive = 0;
 var numFixedDead = 0;
 
+const mainPanel = document.getElementById('main');
+
+const canvasGrid = document.getElementById(CELL_GRID_ID);
+const context = canvasGrid.getContext('2d');
+
+const hitCanvas = document.getElementById('hit-canvas');
+const hitCtx = hitCanvas.getContext('2d');
 
 //Emily's color updating function
-function updateDead(picker){
+function updateDead(picker) {
     var newColor = picker.toRGBString();
     COLORS[0] = newColor;
 }
 
-function updateAlive(picker){
+function updateAlive(picker) {
     var newColor = picker.toRGBString();
     COLORS[1] = newColor;
 }
 
-function updateFDead(picker){
+function updateFDead(picker) {
     var newColor = picker.toRGBString();
     COLORS[2] = newColor;
 }
 
-function updateFAlive(picker){
+function updateFAlive(picker) {
     var newColor = picker.toRGBString();
     COLORS[3] = newColor;
 }
+
+
+
+function handleClick(e) {
+    return
+    var rect = canvasGrid.getBoundingClientRect();
+    console.log("rect: ", rect.top, rect.left);
+    console.log("e: ", e.y, e.x);
+    var x = e.x - rect.left;
+    var y = e.y - rect.top;
+    console.log("y, x", y, x);
+    var bw = mainPanel.offsetWidth;
+    var bh = mainPanel.offsetHeight;
+
+    var WIDTH_PAD = 10.5 + ((bw % CELL_DIMENSION) / 2)
+    var HEIGHT_PAD = 10.5 + ((bh % CELL_DIMENSION) / 2)
+
+    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
+    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
+    x = Math.floor(x);
+    y = Math.floor(y);
+    //console.log(HEIGHT_PAD, WIDTH_PAD)  
+    console.log(y, x)
+    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+
+
+    updateCellAppearance(y, x, 4);
+
+
+
+
+    return;
+    var c = document.getElementById(CELL_GRID_ID).getContext("2d");
+    c.fillStyle = "black";
+
+    var boxSize = CELL_DIMENSION;
+    c.fillRect(Math.floor(e.offsetX / boxSize) * boxSize,
+        Math.floor(e.offsetY / boxSize) * boxSize,
+        boxSize, boxSize);
+}
+
+
+var lastHover = false;
+function handleHover(e) {
+    var rect = document.getElementById(CELL_GRID_ID);
+
+    var x = e.x - rect.offsetLeft;
+    var y = e.y - rect.offsetTop;
+
+    var bw = mainPanel.offsetWidth;
+    var bh = mainPanel.offsetHeight;
+
+    var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
+    var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
+
+    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
+    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
+    x = Math.floor(x);
+    y = Math.floor(y);
+
+    hov = [y, x];
+
+    updateCellAppearance(lastHover[0], lastHover[1], 15, 0)
+
+    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+    if (lastHover !== hov) updateCellAppearance(y, x, 15, .2);
+    lastHover = [y, x];
+}
+
+//canvasGrid.addEventListener('click', handleClick);
+//document.getElementById(CELL_GRID_ID).addEventListener('mousemove', handleHover);
+
+
+
+function updateCellAppearance(y, x, status, colorKey) {
+    return;
+
+   
+    var WIDTH_PAD = 10 + ((mainPanel.offsetWidth % CELL_DIMENSION) / 2);
+    var HEIGHT_PAD = 10 + ((mainPanel.offsetHeight % CELL_DIMENSION) / 2);
+
+    context.fillStyle = COLORS[status];
+    hitCtx.fillStyle = colorKey;
+    hitCtx.fillRect((x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 1, CELL_DIMENSION - 1);
+    context.fillRect((x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 1, CELL_DIMENSION - 1);
+    
+    //console.log("cell: ", y * CELL_DIMENSION + 1 + HEIGHT_PAD, x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD);
+}
+
+function updateCellHitRegion(y, x, colorKey) {
+    return;
+    var WIDTH_PAD = 10 + ((mainPanel.offsetWidth % CELL_DIMENSION) / 2);
+    var HEIGHT_PAD = 10 + ((mainPanel.offsetHeight % CELL_DIMENSION) / 2);
+
+    hitCtx.fillStyle = colorKey;
+    hitCtx.fillRect((x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
+}
+
+
+const colorsHash = {};
+
+var colorIncrementer = 1;
+
+
+function createSquare(r, g, b, s) {
+    var imgData = hitCtx.createImageData(s, s);
+    var len = imgData.data.length;
+    for(var i = 0; i < len; i += 4) {
+        imgData.data[i+0] = r;
+        imgData.data[i+1] = g;
+        imgData.data[i+2] = b;
+        imgData.data[i+3] = 255;
+    }
+    return imgData;
+}
+
+var topPadding = 10;
+var leftPadding = 10;
+
+function addSquareToCanvas(y, x, rgbColor) {
+    const cell = cellGrid[y][x];
+    const square = createSquare(rgbColor[0], rgbColor[1], rgbColor[2], CELL_DIMENSION);
+    context.putImageData(square, leftPadding + (x*CELL_DIMENSION) + x, topPadding + (y*CELL_DIMENSION) + y);
+}
+
+const highlightColor = "orange";
+
+function drawBorder(y, x, strokeColor, lineWidth) {
+    context.beginPath();
+    context.strokeStyle = strokeColor;
+    context.lineWidth = lineWidth;
+    context.rect(leftPadding + (x*CELL_DIMENSION) + x, topPadding + (y*CELL_DIMENSION) + y, CELL_DIMENSION, CELL_DIMENSION);
+    
+    context.stroke();
+}
+
+
+function getRandomColor() {
+    console.log(colorIncrementer)
+    const r = (colorIncrementer % 256);
+    const g = Math.floor((colorIncrementer / 256));
+    const b = Math.floor((colorIncrementer) / 65536);
+    colorIncrementer++;
+    rgbString = "rgb(" + r + "," + g + "," + b + ")";
+    return rgbString;
+}
+
+function hasSameColor(color, shape) {
+    return shape.color === color;
+}
+
+canvasGrid.addEventListener('click', onCanvasClick);
+
+function onCanvasClick(e) {
+    const mousePos = {
+        x: e.clientX - mainPanel.offsetLeft,
+        y: e.clientY - mainPanel.offsetTop
+    };
+    console.log(mousePos.y, mousePos.x)
+    var x = Math.floor((mousePos.x - leftPadding) / CELL_DIMENSION);
+    var y = Math.floor((mousePos.y - topPadding) / CELL_DIMENSION);
+    console.log("x:", x, "y:", y);
+    drawBorder(y, x);
+    const pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+    console.log(pixel)
+    const rgbString = "rgb(" + pixel[0] + "," + pixel[1] + "," + pixel[2] + ")";
+    const color = rgbString;
+    const shape = colorsHash[color];
+    if (shape !== undefined) {
+        //console.log("hi", color, shape);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function cellUniverse() {
     this.leftBound = 0;
@@ -63,11 +259,22 @@ function cellUniverse() {
                 if (cellGrid[i][j] == undefined) {
                     cellGrid[i].push(new Cell(i, j));
                     cellGrid[i][j].setIsAlive(false);
+                    var colorKey = getRandomColor();
+                    if (!colorsHash[colorKey]) { //no need for this if
+                        console.log(i, j);
+                        cellGrid[i][j].colorKey = colorKey;
+                        colorsHash[colorKey] = cellGrid[i][j];
+                    }
+                    else alert("STOP!"); //debug something is wrong
                 }
-                cellGrid[i][j].updateAppearance();
+                colorKey = colorKey.substring(colorKey.indexOf('(') + 1, colorKey.indexOf(')'));
+                colorKey = colorKey.split(',');
+                addSquareToCanvas(i, j, colorKey);
+                //cellGrid[i][j].updateAppearance();
+
                 countCell(i, j);
-            } 
-            
+            }
+
         }
         updateCounter();
     }
@@ -85,19 +292,23 @@ function cellUniverse() {
         }
     }
 
-    this.generateGrid = function (){
-        console.log("a")
-        var bw = document.getElementById('main').offsetWidth;
-        var bh = document.getElementById('main').offsetHeight;
+    this.generateGrid = function () {
+       
+        var bw = mainPanel.offsetWidth;
+        var bh = mainPanel.offsetHeight;
         //padding around grid
         var p = 10;
         //size of canvas
-        var cw = bw + (p*2) + 1;
-        var ch = bh + (p*2) + 1;
+  
+        var cw = bw + (p * 2);
+        var ch = bh + (p * 2);
 
-        var canvasGrid = document.getElementById(CELL_GRID_ID);
+
         canvasGrid.setAttribute("width", cw);
         canvasGrid.setAttribute("height", ch);
+        hitCanvas.setAttribute("width", cw);
+        hitCanvas.setAttribute("height", ch);
+
 
         var evenWidth = bw - (bw % CELL_DIMENSION)
         var evenHeight = bh - (bh % CELL_DIMENSION)
@@ -105,20 +316,20 @@ function cellUniverse() {
         var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
         var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
 
-        var context = canvasGrid.getContext("2d");
+
         for (var x = 0; x <= evenWidth; x += CELL_DIMENSION) {
-            context.moveTo(0.5 + x + WIDTH_PAD, HEIGHT_PAD);
-            context.lineTo(0.5 + x + WIDTH_PAD, evenHeight + HEIGHT_PAD);
+            context.moveTo(.5 + x + WIDTH_PAD, HEIGHT_PAD);
+            context.lineTo(.5 + x + WIDTH_PAD, evenHeight + HEIGHT_PAD);
         }
 
 
         for (var x = 0; x <= evenHeight; x += CELL_DIMENSION) {
-            context.moveTo(WIDTH_PAD, 0.5 + x + HEIGHT_PAD);
-            context.lineTo(evenWidth + WIDTH_PAD, 0.5 + x + HEIGHT_PAD);
-            }
-
+            context.moveTo(WIDTH_PAD, .5 + x + HEIGHT_PAD);
+            context.lineTo(evenWidth + WIDTH_PAD, .5 + x + HEIGHT_PAD);
+        }
+        context.lineWidth = .1;
         context.strokeStyle = "black";
-        context.stroke();
+
     }
 
 
@@ -141,7 +352,7 @@ function cellUniverse() {
     }
 
     this.updateBounds = function () {
-        var canvasGrid = document.getElementById(CELL_GRID_ID);
+
         var gridHeight = canvasGrid.offsetHeight;
         var gridWidth = canvasGrid.offsetWidth;
 
@@ -164,7 +375,7 @@ function Cell(y, x) {
     this.yCoordinate = y;
     this.xCoordinate = x;
     this.isSelected = false;
-    this.cellState = []; 
+    this.cellState = [];
 
 
 
@@ -216,9 +427,12 @@ function Cell(y, x) {
     /*****Methods*****/
 
     this.updateAppearance = function () {
-        updateCellAppearance(this.getYCoordinate(), this.getXCoordinate(), Number(this.getIsAlive()));
+        updateCellAppearance(this.getYCoordinate(), this.getXCoordinate(), Number(this.getIsAlive()), this.colorKey);
     }
 
+    this.updateHitRegion = function () {
+        updateCellHitRegion(this.getYCoordinate(), this.getXCoordinate(), this.colorKey);
+    }
     this.calculateIsAliveNextRound = function () {
         if (this.getIsFixed() === true) {
             this.setIsAliveNextRound(this.isAlive);
@@ -338,83 +552,17 @@ function updateCounter() {
 }
 function countCell(y, x) {
     var cell = cellGrid[y][x];
-    if(cell.getIsAlive() == true) {
+    if (cell.getIsAlive() == true) {
         numAlive++;
-        if(cell.isFixed == true) numFixedAlive++;
+        if (cell.isFixed == true) numFixedAlive++;
     }
 
     else {
         numDead++;
-        if(cell.isFixed == true) numFixedDead++; 
+        if (cell.isFixed == true) numFixedDead++;
     }
 }
 
-function handleClick(e) {
-    var rect = document.getElementById(CELL_GRID_ID).getBoundingClientRect();
-    console.log(rect.left, e.x, "and", rect.top, e.y);
-    var x = e.x - rect.left;
-    var y = e.y - rect.top;
-
-    var bw = document.getElementById('main').offsetWidth;
-    var bh = document.getElementById('main').offsetHeight;
-
-    var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
-    var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
-
-    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
-    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
-    x = Math.floor(x);
-    y = Math.floor(y);
-    console.log(HEIGHT_PAD, WIDTH_PAD)  
-    console.log(y, x)
-    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
-    
-    
-    updateCellAppearance(y, x, 4);
-
-    
-   
-    
-    return;
-    var c = document.getElementById(CELL_GRID_ID).getContext("2d");
-    c.fillStyle = "black";
-    
-    var boxSize = CELL_DIMENSION;
-    c.fillRect(Math.floor(e.offsetX / boxSize) * boxSize,
-      Math.floor(e.offsetY / boxSize) * boxSize,
-      boxSize, boxSize);
-  }
-
-
-  var lastHover = false;
-  function handleHover(e) { 
-    var rect = document.getElementById(CELL_GRID_ID).getBoundingClientRect();
-
-    var x = e.x - rect.left;
-    var y = e.y - rect.top;
-
-    var bw = document.getElementById('main').offsetWidth;
-    var bh = document.getElementById('main').offsetHeight;
-
-    var WIDTH_PAD = 10 + ((bw % CELL_DIMENSION) / 2)
-    var HEIGHT_PAD = 10 + ((bh % CELL_DIMENSION) / 2)
-
-    x = (x - WIDTH_PAD) / (CELL_DIMENSION);
-    y = (y - HEIGHT_PAD) / (CELL_DIMENSION);
-    x = Math.floor(x);
-    y = Math.floor(y);
- 
-    hov = [y, x];
-
-    updateCellAppearance(lastHover[0], lastHover[1], 15, 0)
-   
-    //x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
-    if(lastHover !== hov) updateCellAppearance(y, x, 15, .2);
-    lastHover = [y, x];
-}
-
-  //document.getElementById(CELL_GRID_ID).addEventListener('click', handleClick);
-  document.getElementById(CELL_GRID_ID).addEventListener('mousemove', handleHover);
 
 
 
@@ -439,7 +587,7 @@ var finishedResizing;
 
 function windowResize() {
     clearTimeout(finishedResizing); //assures that resizing doesnt happen to quickly.
-    finishedResizing = setTimeout(function(){ world.resize(CELL_DIMENSION) }, RESIZE_TIME_DELAY); //only resizes after 10 milliseconds of not resizing
+    finishedResizing = setTimeout(function () { world.resize(CELL_DIMENSION) }, RESIZE_TIME_DELAY); //only resizes after 10 milliseconds of not resizing
 }
 
 function clearSelected() {
@@ -456,7 +604,7 @@ function toggleSelectedAppearance(id, status) {
     if (isCellInBounds(coor[0], coor[1]) == false) return removeCellFromSelected(index); //cell is out of bounds
 
     if (status != -1) {
-        
+
         cellGrid[coor[0]][coor[1]].updateAppearance();
         removeCellFromSelected(index);
     }
@@ -479,27 +627,11 @@ function generateSelectedCells() {
     var size = selectedCells.length;
     for (var i = 0; i < size; i++) {
         var id = selectedCells[i];
-        
+
         toggleSelectedAppearance(id, -1);
     }
 }
 
-function updateCellAppearance(y, x, status, opacity) {
-
-    var canvasGrid = document.getElementById(CELL_GRID_ID);
-    var context = canvasGrid.getContext('2d');
-    var WIDTH_PAD = 10 + ((document.getElementById('main').offsetWidth % CELL_DIMENSION) / 2);
-    var HEIGHT_PAD = 10 + ((document.getElementById('main').offsetHeight % CELL_DIMENSION) / 2);
-    context.fillStyle = "white";
-    if(status === MAKE_OPAQUE_SIG) {
-        console.log("Fd")
-      context.fillStyle = "rgba(0, 0, 255, " + opacity;
-
-    }
-    else context.fillStyle = COLORS[status];
-    
-    context.fillRect((x * CELL_DIMENSION + 1 + WIDTH_PAD), (y * CELL_DIMENSION + 1 + HEIGHT_PAD), CELL_DIMENSION - 2, CELL_DIMENSION - 2);
-}1
 
 function parseCellID(id) {
     return id.split('!');
@@ -532,7 +664,7 @@ function selectCell(id) {
 function isCellInBounds(y, x) {
 
     if (y < world.topBound || y > world.bottomBound || x < world.leftBound || x > world.rightBound) {
-        
+
         return false;
 
     }
@@ -551,69 +683,69 @@ function makeOpaqueGradient(gradientType, color) {
 function openTab(evt, cityName) {
     // Declare all variables
     var i, tabcontent, tablinks;
-  
+
     // Get all elements with class="tabcontent" and hide them
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
+        tabcontent[i].style.display = "none";
     }
-  
+
     // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-  
+
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
-  }
+}
 
 
-  var playInterval;
+var playInterval;
 
-  function disableButtons() {
+function disableButtons() {
 
-  }
+}
 
-  function enableButtons() {
+function enableButtons() {
 
-  }
+}
 
-  function showPlayButton() {
+function showPlayButton() {
     document.getElementById('play-btn').children[0].innerHTML = "play_arrow"
-  }
+}
 
-  function showPauseButton() {
+function showPauseButton() {
     document.getElementById('play-btn').children[0].innerHTML = "pause"
-  }
+}
 
-  function onPlay() {
-      if(playState == false) playGame();
-      else pauseGame();
-  }
+function onPlay() {
+    if (playState == false) playGame();
+    else pauseGame();
+}
 
-  function playGame() {
-      playState = true;
-      disableButtons()
-      showPauseButton();
-      playInterval = setInterval(tick, tick_freq);
-  }
-
-
-
-  function pauseGame() {
-      clearInterval(playInterval);
-      playState = false;
-      enableButtons();
-      showPlayButton();
-  }
+function playGame() {
+    playState = true;
+    disableButtons()
+    showPauseButton();
+    playInterval = setInterval(tick, tick_freq);
+}
 
 
-  function changeSpeed() {
-      var slider = document.getElementById('speed-slider');
-  
-  }
+
+function pauseGame() {
+    clearInterval(playInterval);
+    playState = false;
+    enableButtons();
+    showPlayButton();
+}
+
+
+function changeSpeed() {
+    var slider = document.getElementById('speed-slider');
+
+}
 
 
 
