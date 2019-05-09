@@ -282,7 +282,7 @@ function cellUniverse() {
         if(ROUND_NUM == 0) {
             return;
         }
-        document.getElementById('restore-btn').disabled = true;
+        disableButtons();
         ROUND_NUM--;
         for (var i = 0; i <= this.bottomBound; i++) {
             for (var j = 0; j <= this.rightBound; j++) {
@@ -291,7 +291,7 @@ function cellUniverse() {
             }
             this.generateCells();
         } 
-        document.getElementById('restore-btn').disabled = false;
+        enableButtons();
     }
     this.updateBounds = function () {
         leftPadding = CELL_DIMENSION;
