@@ -8,7 +8,7 @@ var PADDING = 10;
 var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "rgba(10, 10, 10, 1)", "rgba(255, 204, 153, 1)", "rgb(255,192,203)"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(127, 255, 212, 1)", "rgba(255,255,250, 1)", "rgba(10, 10, 10, 1)", "rgba(255, 204, 153, 1)", "rgb(255,192,203)"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
 
 
