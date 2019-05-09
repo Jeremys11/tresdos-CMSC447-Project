@@ -45,14 +45,14 @@
         <div id="game-stats-title" class="tabcontent">
           <ul class="tooltip-stat">
             <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
-            <li id="alive-stat-text">Alive: <span id="alive-text"></span></li>
-            <li id="dead-stat-text">Dead: <span id="dead-text"></span></li>
+            <li id="alive-stat-text"> <span id="alive-text"></span></li>
+            <li id="dead-stat-text"><span id="dead-text"></span></li>
           </ul>
         </div>
 
         <div id="change-language" class="tabcontent">
           <span data-i18n="change-language-title" id="change-language-title" class="tab-title">Language</span><br>
-          <select class="langSelector">
+          <select id="langNow" class="langSelector">
             <option data-i18n="engOption" value="en">English</option>
             <option data-i18n="gerOption" value="de">German</option>
           </select>
@@ -105,7 +105,7 @@
         <div class="mid-slider">
           <span><i class="material-icons md-30">photo_size_select_small</i></span>
           <span data-i18n="cell-slider" class="tooltiptext">Sets the size of the cells</span>
-          <input type="range" min="9" max="150" value="40" class="slider" id="size-slider">
+          <input type="range" min="9" max="100" value="40" class="slider" id="size-slider">
         </div>
         <div class="mid-slider">
           <span><i class="material-icons md-30">grid_on</i></span>
@@ -132,7 +132,7 @@
           id="Backgr">Grid</button>
 
 
-        <div id="swapbox">Selector
+        <div id="swapbox">Select Mode
           <select id="colorSelBox">
             <option value="a">Alive</option>
             <option value="b">Dead</option>

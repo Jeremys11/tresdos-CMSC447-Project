@@ -1,5 +1,5 @@
 const MIN_DIM = 9;
-const MAX_DIM = 150;
+const MAX_DIM = 100;
 const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
@@ -282,6 +282,7 @@ function cellUniverse() {
         if(ROUND_NUM == 0) {
             return;
         }
+        document.getElementById('restore-btn').disabled = true;
         ROUND_NUM--;
         for (var i = 0; i <= this.bottomBound; i++) {
             for (var j = 0; j <= this.rightBound; j++) {
@@ -290,6 +291,7 @@ function cellUniverse() {
             }
             this.generateCells();
         } 
+        document.getElementById('restore-btn').disabled = false;
     }
     this.updateBounds = function () {
         leftPadding = CELL_DIMENSION;
@@ -526,9 +528,19 @@ function resetCounter() {
 }
 
 function updateCounter() {
-    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
-    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
+    if(document.getElementById('langNow').value === "de" ) {
+        document.getElementById("alive-text").innerText = "Leben: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Tot: " + numDead + " (" + numFixedDead + ")";
+    }
+    else {
+        document.getElementById("alive-text").innerText = "Alive: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Dead: " + numDead + " (" + numFixedDead + ")";
+    }
+    
 }
+
+document.getElementById('langNow').addEventListener('change', updateCounter);
+
 function countCell(y, x) {
     var cell = cellGrid[y][x];
     if (cell.getIsAlive() == true) {
