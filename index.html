@@ -18,19 +18,7 @@
 </head>
 
 <body>
-  <script type="text/javascript">
-    if (document.addEventListener) { // IE >= 9; other browsers
-      document.addEventListener('contextmenu', function (e) {
-        alert("You've tried to open context menu"); //here you draw your own menu
-        e.preventDefault();
-      }, false);
-    } else { // IE < 9
-      document.attachEvent('oncontextmenu', function () {
-        alert("You've tried to open context menu");
-        window.event.returnValue = false;
-      });
-    }
-  </script>
+
 
   <body onresize="windowResize()">
     <div id="top-panel">
@@ -126,22 +114,24 @@
         </div>
       </div>
       <div id="box3">
-        <button draggable="true" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllAlive(true, false, event)" ondrag="myFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'484848'}"
           id="aliveColor">Alive</button>
-        <button draggable="true" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllAlive(false, false)" ondrag="myFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'484848'}"
           id="deadColor">Dead</button>
-        <button draggable="true" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllAlive(true, true)"ondrag="myFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'484848'}" id="fAliveColor">Fixed Alive
         </button>
-        <button draggable="true" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllAlive(false, true)" ondrag="myFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'484848'}" id="fDeadColor">Fixed
           Dead</button>
 
         <button draggable="true" ondrag="myFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'484848'}"
           id="Backgr">Grid</button>
+
+
         <div id="swapbox">Selector
           <select id="colorSelBox">
             <option value="a">Alive</option>

@@ -546,12 +546,30 @@ function selectAllAlive(currAliveStatus, currFixedStatus, newAliveStatus, newFix
     world.resize(CELL_DIMENSION);
 }
 
-
+function setAllAlive(newAliveStatus, newFixedStatus) {
+    event.preventDefault();
+    var rows = cellGrid.length;
+    var cols = cellGrid[0].length;
+    for(var i = 0; i < rows; i++) {
+        for(var j = 0; j < cols; j++) {
+    
+                cellGrid[i][j].isAlive = newAliveStatus;
+                cellGrid[i][j].isFixed = newFixedStatus;
+            
+        }
+    }
+    world.resize(CELL_DIMENSION);
+}
 
 function tick() {
     totalRounds++;
     ROUND_NUM++;
     world.tick();
+}
+
+
+function myFunction(e) {
+
 }
 
 function reverseTick() {
@@ -772,10 +790,6 @@ function updateButtonColor() {
 
 
 
-
-function myFunction(e) {
-    
-}
 
 document.addEventListener("drop", function(ev) {
     var data = ev.dataTransfer.getData("text");
