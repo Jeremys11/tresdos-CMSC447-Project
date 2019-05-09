@@ -12,10 +12,25 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
+  <script src="js/jscolor.js"></script>
+  <script src="https://unpkg.com/canvas-datagrid"></script>
 
 </head>
 
 <body>
+  <script type="text/javascript">
+    if (document.addEventListener) { // IE >= 9; other browsers
+      document.addEventListener('contextmenu', function (e) {
+        alert("You've tried to open context menu"); //here you draw your own menu
+        e.preventDefault();
+      }, false);
+    } else { // IE < 9
+      document.attachEvent('oncontextmenu', function () {
+        alert("You've tried to open context menu");
+        window.event.returnValue = false;
+      });
+    }
+  </script>
 
   <body onresize="windowResize()">
     <div id="top-panel">
@@ -24,22 +39,23 @@
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" onclick="openTab(event, 'game-stats-title')">
-		<span data-i18n="game-stats" class="tooltiptext">Game Stats</span>
-		<span class="iconify info-icons" data-icon="whh:statistics" data-inline="false"></span></button>
-	  </div>
+          <div> <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'game-stats-title')">
+              <span data-i18n="game-stats" class="tooltiptext">Game Stats</span>
+              <span class="iconify info-icons" data-icon="whh:statistics" data-inline="false"></span></button>
+          </div>
           <div> <button class="tablinks" onclick="openTab(event, 'change-language')">
-		<span data-i18n="change-language-title" class="tooltiptext">Language</span>
-		<span class="iconify info-icons" data-icon="ic:baseline-translate" data-inline="false"></span></button>
-	  </div>
+              <span data-i18n="change-language-title" class="tooltiptext">Language</span>
+              <span class="iconify info-icons" data-icon="ic:baseline-translate" data-inline="false"></span></button>
+          </div>
           <div> <button class="tablinks" onclick="openTab(event, 'how-to')">
-		<span data-i18n="how-to-title" class="tooltiptext">How to Play</span>
-		<span class="iconify info-icons" data-icon="ant-design:info-circle-fill" data-inline="false"></span></button>
-	  </div>
+              <span data-i18n="how-to-title" class="tooltiptext">How to Play</span>
+              <span class="iconify info-icons" data-icon="ant-design:info-circle-fill"
+                data-inline="false"></span></button>
+          </div>
         </div>
 
         <div id="game-stats-title" class="tabcontent">
-          <ul class="tooltip-stat">  
+          <ul class="tooltip-stat">
             <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
             <li id="alive-stat-text">Alive: <span id="alive-text"></span></li>
             <li id="dead-stat-text">Dead: <span id="dead-text"></span></li>
@@ -49,75 +65,104 @@
         <div id="change-language" class="tabcontent">
           <span data-i18n="change-language-title" id="change-language-title" class="tab-title">Language</span><br>
           <select class="langSelector">
-              <option data-i18n="engOption" value="en">English</option>
-              <option data-i18n="gerOption" value="de">German</option>
+            <option data-i18n="engOption" value="en">English</option>
+            <option data-i18n="gerOption" value="de">German</option>
           </select>
 
         </div>
 
         <div id="how-to" class="tabcontent">
-            <span data-i18n="how-to-title" id="how-to-title" class="tab-title">How to Play</span>
-            <div>
-              <div data-i18n="htLineOne">A live cell with fewer than two live neighbours dies by underpopulation.</div>
-              <div data-i18n="htLineTwo">A live cell with two/three live neighbours lives on to the next generation.</div>
-              <div data-i18n="htLineThree">A live cell more than three live neighbours dies by overpopulation.</div>
-              <div data-i18n="htLineFour">A dead cell with three live neighbours becomes a live cell by reproduction.</div>
-              <div data-i18n="htLineFive">A fixed cell will stay their type no matter what their neighbors are.</div>
+          <span data-i18n="how-to-title" id="how-to-title" class="tab-title">How to Play</span>
+          <div>
+            <div data-i18n="htLineOne">A live cell with fewer than two live neighbours dies by underpopulation.</div>
+            <div data-i18n="htLineTwo">A live cell with two/three live neighbours lives on to the next generation.</div>
+            <div data-i18n="htLineThree">A live cell more than three live neighbours dies by overpopulation.</div>
+            <div data-i18n="htLineFour">A dead cell with three live neighbours becomes a live cell by reproduction.
             </div>
+            <div data-i18n="htLineFive">A fixed cell will stay their type no matter what their neighbors are.</div>
+          </div>
         </div>
       </div>
 
     </div>
 
     <div id="main">
-      <table id="cell-grid"></table>
+      <canvas id="cell-grid"></canvas>
     </div>
     <div id="bottom-panel">
       <div id="box1">
         <div class="flex-container">
           <div class="tooltipButtonLeft"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">restore</i>
-              </button>
-              <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
-            </div>
+            </button>
+            <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
+          </div>
           <div class="tooltipButtonLeft"><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">play_arrow</i></button>
-                <span data-i18n="run-tip" class="tooltiptext">Play or pause the simulation</span>    
+            <span data-i18n="run-tip" class="tooltiptext">Play or pause the simulation</span>
           </div>
           <div class="tooltipButtonLeft"><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">skip_next</i></button>
-                <span data-i18n="step-tip" class="tooltiptext">Run one step of simulation</span>
+            <span data-i18n="step-tip" class="tooltiptext">Run one step of simulation</span>
           </div>
         </div>
         <div class="tooltipSliderLeft">
           <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
-          <span data-i18n="speed" class="tooltiptext">Speed of simulation</span>
-          <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider">
+          <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider" step="10">
         </div>
 
       </div>
 
       <div id="box2">
         <div class="mid-slider">
-          <i class="material-icons md-30"><span class=></span>photo_size_select_small</i>
+          <span><i class="material-icons md-30">photo_size_select_small</i></span>
           <span data-i18n="cell-slider" class="tooltiptext">Sets the size of the cells</span>
-          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+          <input type="range" min="9" max="150" value="40" class="slider" id="size-slider">
         </div>
         <div class="mid-slider">
           <span><i class="material-icons md-30">grid_on</i></span>
-          <span data-i18n="grid-slider" class="tooltiptext">Sets the size of the grid</span>  
-          <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+          <span data-i18n="grid-slider" class="tooltiptext">Sets the size of the grid</span>
+          <input type="range" min="10" max="100" value="100" class="slider" id="grid-slider">
         </div>
       </div>
-
       <div id="box3">
-    
-      </div>
+        <button draggable="true" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'484848'}"
+          id="aliveColor">Alive</button>
+        <button draggable="true" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'484848'}"
+          id="deadColor">Dead</button>
+        <button draggable="true" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'484848'}" id="fAliveColor">Fixed Alive
+        </button>
+        <button draggable="true" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'484848'}" id="fDeadColor">Fixed
+          Dead</button>
 
+        <button draggable="true" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'484848'}"
+          id="Backgr">Grid</button>
+        <div id="swapbox">Selector
+          <select id="colorSelBox">
+            <option value="a">Alive</option>
+            <option value="b">Dead</option>
+            <option value="c">Fixed Alive</option>
+            <option value="d">Fixed Dead</option>
+          </select>
+        </div>
+      </div>
     </div>
   </body>
+
+ 
+  </div>
   <script type="text/javascript" src="js/cell.js"></script>
   <script type="text/javascript" src="bundle.js"></script>
-  <script src="js/modernizr.custom.js"></script>  
+
+  <script src="js/modernizr.custom.js"></script>
+  <script>
+    document.getElementById("defaultOpen").click();
+
+  </script>
 
 </html>
