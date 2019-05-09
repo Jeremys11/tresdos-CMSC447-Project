@@ -266,7 +266,7 @@ td:hover {
   }
   
   /* Style the tab content */
-  .tabcontent {
+.tabcontent {
     float: left;
     text-align: center;
     top: 0px;
@@ -276,6 +276,24 @@ td:hover {
     height: 100%;
     font-family: 'Roboto';
 
+  }
+
+.tablinks .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+
+.tablinks:hover .tooltiptext {
+    visibility: visible;
   }
 
 ul {

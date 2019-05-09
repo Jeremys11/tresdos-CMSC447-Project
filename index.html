@@ -25,12 +25,18 @@
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" onclick="openTab(event, 'game-stats-title')"><span class="iconify info-icons"
-                data-icon="whh:statistics" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openTab(event, 'change-language')"><span class="iconify info-icons"
-                data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openTab(event, 'how-to')"><span class="iconify info-icons"
-                data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
+          <div> <button class="tablinks" onclick="openTab(event, 'game-stats-title')">
+		<span data-i18n="game-stats" class="tooltiptext">Game Stats</span>
+		<span class="iconify info-icons" data-icon="whh:statistics" data-inline="false"></span></button>
+	  </div>
+          <div> <button class="tablinks" onclick="openTab(event, 'change-language')">
+		<span data-i18n="change-language-title" class="tooltiptext">Language</span>
+		<span class="iconify info-icons" data-icon="ic:baseline-translate" data-inline="false"></span></button>
+	  </div>
+          <div> <button class="tablinks" onclick="openTab(event, 'how-to')">
+		<span data-i18n="how-to-title" class="tooltiptext">How to Play</span>
+		<span class="iconify info-icons" data-icon="ant-design:info-circle-fill" data-inline="false"></span></button>
+	  </div>
         </div>
 
         <div id="game-stats-title" class="tabcontent">
@@ -73,7 +79,6 @@
         <div class="flex-container">
           <div><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">restore</i>
-                <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
               </button></div>
           <div><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">play_arrow</i></button></div>
