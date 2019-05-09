@@ -34,46 +34,50 @@
   <body onresize="windowResize()">
     <div id="top-panel">
       <div id="title-box">
-        <h1 data-i18n="title">Conway's Game of Life</h1>
+        <h1 id="title" data-i18n="title">Conway's Game of Life</h1>
       </div>
       <div id="top-box" class="container">
         <div class="tab">
-          <div> <button class="tablinks" id="defaultOpen" onclick="openTab(event, 'game-stats')"><span class="iconify info-icons"
-                data-icon="whh:statistics" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openTab(event, 'change-language')"><span class="iconify info-icons"
-                data-icon="ic:baseline-translate" data-inline="false"></span></button></div>
-          <div> <button class="tablinks" onclick="openTab(event, 'how-to')"><span class="iconify info-icons"
-                data-icon="ant-design:info-circle-fill" data-inline="false"></span></button></div>
+          <div> <button class="tablinks"  id="defaultOpen" onclick="openTab(event, 'game-stats-title')">
+		<span data-i18n="game-stats" class="tooltiptext">Game Stats</span>
+		<span class="iconify info-icons" data-icon="whh:statistics" data-inline="false"></span></button>
+	  </div>
+          <div> <button class="tablinks" onclick="openTab(event, 'change-language')">
+		<span data-i18n="change-language-title" class="tooltiptext">Language</span>
+		<span class="iconify info-icons" data-icon="ic:baseline-translate" data-inline="false"></span></button>
+	  </div>
+          <div> <button class="tablinks" onclick="openTab(event, 'how-to')">
+		<span data-i18n="how-to-title" class="tooltiptext">How to Play</span>
+		<span class="iconify info-icons" data-icon="ant-design:info-circle-fill" data-inline="false"></span></button>
+	  </div>
         </div>
 
-        <div id="game-stats" class="tabcontent">
-          <span id="game-stats-title" class="tab-title"><u>Game Stats</u></span>
-          <ul>
-            <li>Alive: <span id="alive-text"></span></li>
-            <li>Dead: <span id="dead-text"></span></li>
+        <div id="game-stats-title" class="tabcontent">
+          <ul class="tooltip-stat">  
+            <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
+            <li id="alive-stat-text">Alive: <span id="alive-text"></span></li>
+            <li id="dead-stat-text">Dead: <span id="dead-text"></span></li>
           </ul>
         </div>
 
         <div id="change-language" class="tabcontent">
-          <span id="change-language-title" class="tab-title">Language</span><br>
+          <span data-i18n="change-language-title" id="change-language-title" class="tab-title">Language</span><br>
           <select class="langSelector">
-              
-              <option data-18n="engOption" value="en">English</option>
-              <option data-18n="gerOption" value="de">German</option>
+              <option data-i18n="engOption" value="en">English</option>
+              <option data-i18n="gerOption" value="de">German</option>
           </select>
 
-       
         </div>
 
         <div id="how-to" class="tabcontent">
-            <span id="how-to-title" class="tab-title">How to Play</span>
-            <ul>
-              <li>A live cell with fewer than two live neighbours dies by underpopulation.</li>
-              <li>A live cell with two/three live neighbours lives on to the next generation.</li>
-              <li>A live cell more than three live neighbours dies by overpopulation.</li>
-              <li>A dead cell with three live neighbours becomes a live cell by reproduction.</li>
-              <li>A fixed cell will stay their type no matter what their neighbors are.</li>
-            </ul>
+            <span data-i18n="how-to-title" id="how-to-title" class="tab-title">How to Play</span>
+            <div>
+              <div data-i18n="htLineOne">A live cell with fewer than two live neighbours dies by underpopulation.</div>
+              <div data-i18n="htLineTwo">A live cell with two/three live neighbours lives on to the next generation.</div>
+              <div data-i18n="htLineThree">A live cell more than three live neighbours dies by overpopulation.</div>
+              <div data-i18n="htLineFour">A dead cell with three live neighbours becomes a live cell by reproduction.</div>
+              <div data-i18n="htLineFive">A fixed cell will stay their type no matter what their neighbors are.</div>
+            </div>
         </div>
       </div>
 
@@ -85,19 +89,27 @@
     <div id="bottom-panel">
       <div id="box1">
         <div class="flex-container">
-          <div><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
-                class="material-icons md-30">restore</i></button></div>
-          <div><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
-                class="material-icons md-30">play_arrow</i></button></div>
-          <div><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
-                class="material-icons md-30">skip_next</i></button></div>
+          <div class="tooltipButtonLeft"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">restore</i>
+              </button>
+              <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
+            </div>
+          <div class="tooltipButtonLeft"><button id="play-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">play_arrow</i></button>
+                <span data-i18n="run-tip" class="tooltiptext">Play or pause the simulation</span>    
+          </div>
+          <div class="tooltipButtonLeft"><button id="skip-btn" class="btn btn-1 btn-1d control-btn"><i
+                class="material-icons md-30">skip_next</i></button>
+                <span data-i18n="step-tip" class="tooltiptext">Run one step of simulation</span>
+          </div>
         </div>
-        <div >
+        <div class="tooltipSliderLeft">
           <span class="iconify" data-icon="mdi-speedometer" data-inline="false"></span>
           <input type="range" min="0" max="100" value="50" class="slider" id="speed-slider" step="10">
         </div>
 
       </div>
+
       <div id="box2">
         <div class="mid-slider">
           <span><i class="material-icons md-30">photo_size_select_small</i></span>

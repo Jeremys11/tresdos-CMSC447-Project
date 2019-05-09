@@ -5,3 +5,6 @@ include my bundle in index.html
 <script src="bundle.js"></script>
 
 Language Options need to be given by a select object with class="langSelector"
+
+Only add text which has a tag and a translation in both languages
+There can be no discrepency between the JSON and index.html

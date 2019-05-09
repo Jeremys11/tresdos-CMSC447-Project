@@ -3,9 +3,10 @@ html, body {
 }
 #top-panel {
   position: absolute;
-  width: 100%;
+  width: 96%;
   height: 15%;
   margin: 0px;
+  right: 2%;
   text-align: center;
  
 }
@@ -38,10 +39,9 @@ html, body {
 
 #bottom-panel {
   position: absolute;
-  width: 100%;
+  width: 96%;
   height: 15%;
   bottom: 0%;
-
 }
 
 #box1 {
@@ -74,6 +74,20 @@ html, body {
 
 }
 
+#alive-text{
+  font-size: 30px;
+}
+
+#dead-text{
+  font-size: 30px;
+}
+
+#alive-stat-text{
+  font-size: 30px;
+}
+#dead-stat-text{
+  font-size: 30px;
+}
 
 .mid-slider {
   display: flex;
@@ -87,10 +101,49 @@ html, body {
 
 }
 
+
+.control-btn .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+
+  position: absolute;
+  z-index: 1;
+}
+
+.control-btn:hover .tooltiptext {
+  visibility: visible;
+}
+
+
 .material-icons.md-30 { 
   font-size: 25px; 
-
 }
+
+.material-icons.md-30 .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 100%;
+  z-index: 1;
+}
+
+.material-icons.md-30:hover .tooltiptext {
+  visibility: visible;
+}
+
 #cell-grid {
   position: absolute;
   left: 0px;
@@ -111,7 +164,7 @@ td:hover {
 
 
 .btn {
-	background: none;
+	background: rgb(255, 255, 255);
 	cursor: pointer;
   text-transform: uppercase;
   position: absolute;
@@ -229,7 +282,7 @@ td:hover {
   }
   
   /* Style the tab content */
-  .tabcontent {
+.tabcontent {
     float: left;
     text-align: center;
     top: 0px;
@@ -239,6 +292,25 @@ td:hover {
     height: 100%;
     font-family: 'Roboto';
 
+  }
+
+.tablinks .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    right: 10%;
+    z-index: 1;
+  }
+
+.tablinks:hover .tooltiptext {
+    visibility: visible;
   }
 
 ul {
@@ -254,6 +326,7 @@ ul {
 
 #game-stats {
   text-align: center;
+  font-size: 20px;
 }
 
 .form-radio
@@ -306,4 +379,122 @@ label
 
 #colorSelBox {
   margin-top: 30px;
+}
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.mid-slider .tooltiptext{
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 75%;
+  top: 30%;
+  z-index: 1;
+}
+
+.mid-slider:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+.tooltipButtonLeft {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipButtonLeft .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  top: 70%;
+  z-index: 1;
+}
+
+.tooltipButtonLeft:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltipSliderLeft {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipSliderLeft .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  z-index: 1;
+}
+
+.tooltipSliderLeft:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip-stat {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-stat .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  right: 100%;
+  z-index: 1;
+}
+
+.tooltip-stat:hover .tooltiptext {
+  visibility: visible;
 }
