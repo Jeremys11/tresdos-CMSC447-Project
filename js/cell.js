@@ -724,10 +724,13 @@ function openTab(evt, cityName) {
 var playInterval;
 
 function disableButtons() {
-
+    document.getElementById('restore-btn').style.visibility = "hidden";
+    document.getElementById('skip-btn').style.visibility = "hidden";
 }
 
 function enableButtons() {
+    document.getElementById('restore-btn').style.visibility = "visible";
+    document.getElementById('skip-btn').style.visibility = "visible";
 
 }
 
