@@ -114,20 +114,20 @@
         </div>
       </div>
       <div id="box3">
-        <button draggable="true" oncontextmenu="setAllAlive(true, false, event)" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllStatus(true, false, event)" ondrag="dragFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'DCDCDC'}"
           id="aliveColor">Alive</button>
-        <button draggable="true" oncontextmenu="setAllAlive(false, false)" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllStatus(false, false)" ondrag="dragFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'DCDCDC'}"
           id="deadColor">Dead</button>
-        <button draggable="true" oncontextmenu="setAllAlive(true, true)"ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllStatus(true, true)"ondrag="dragFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'DCDCDC'}" id="fAliveColor">Fixed Alive
         </button>
-        <button draggable="true" oncontextmenu="setAllAlive(false, true)" ondrag="myFunction(event)"
+        <button draggable="true" oncontextmenu="setAllStatus(false, true)" ondrag="dragFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'DCDCDC'}" id="fDeadColor">Fixed
           Dead</button>
 
-        <button draggable="true" ondrag="myFunction(event)"
+        <button draggable="true" ondrag="dragFunction(event)"
           class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'DCDCDC'}"
           id="Backgr">Grid</button>
 
@@ -152,7 +152,7 @@
   <script src="js/modernizr.custom.js"></script>
   <script>
     document.getElementById("defaultOpen").click();
-
+    
   </script>
 
 </html>
