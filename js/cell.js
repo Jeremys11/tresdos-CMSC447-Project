@@ -1,5 +1,5 @@
 const MIN_DIM = 9;
-const MAX_DIM = 150;
+const MAX_DIM = 100;
 const CELL_GRID_ID = "cell-grid"
 const RESIZE_TIME_DELAY = 50; //IN MILLISECONDS
 var CELL_DIMENSION = 40; //20 X 20 PIXEL SQUARE
@@ -8,7 +8,7 @@ var PADDING = 10;
 var ROUND_NUM = 0;
 var selectedCells = [];
 var cellGrid = [];
-var COLORS = ["rgba(255, 0, 0, 1)", "rgba(0,255,0, 1)", "rgba(10, 10, 10, 1)", "rgba(255, 204, 153, 1)", "rgb(255,192,203)"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
+var COLORS = ["rgba(177, 177, 177, 1)", "rgba(0,153,255, 1)", "rgba(10, 10, 10, 1)", "rgba(255, 204, 153, 1)", "rgb(78, 140, 167)"]; // [DEAD, ALIVE, FIXED-DEAD, FIXED-ALIVE, GRIDLINES]
 
 
 
@@ -278,7 +278,21 @@ function cellUniverse() {
         this.generateCells();
         
     }
-
+    this.reverseTick = function() {
+        if(ROUND_NUM == 0) {
+            return;
+        }
+        disableButtons();
+        ROUND_NUM--;
+        for (var i = 0; i <= this.bottomBound; i++) {
+            for (var j = 0; j <= this.rightBound; j++) {
+                cellGrid[i][j].reverseTick(ROUND_NUM);
+            
+            }
+            this.generateCells();
+        } 
+        enableButtons();
+    }
     this.updateBounds = function () {
         leftPadding = CELL_DIMENSION;
         topPadding = CELL_DIMENSION;
@@ -466,8 +480,8 @@ function Cell(y, x) {
             this.isFixed = false;
         }
         else {
-            this.isAlive = cellState[oldRoundNum][0];
-            this.isFixed = cellState[oldRoundNum][1];
+            this.isAlive = this.cellState[oldRoundNum][0];
+            this.isFixed = this.cellState[oldRoundNum][1];
         }
 
         this.updateAppearance();
@@ -514,9 +528,19 @@ function resetCounter() {
 }
 
 function updateCounter() {
-    document.getElementById("alive-text").innerText = numAlive + " (" + numFixedAlive + ")";
-    document.getElementById("dead-text").innerText = numDead + " (" + numFixedDead + ")";
+    if(document.getElementById('langNow').value === "de" ) {
+        document.getElementById("alive-text").innerText = "Leben: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Tot: " + numDead + " (" + numFixedDead + ")";
+    }
+    else {
+        document.getElementById("alive-text").innerText = "Alive: " + numAlive + " (" + numFixedAlive + ")";
+     document.getElementById("dead-text").innerText = "Dead: " + numDead + " (" + numFixedDead + ")";
+    }
+    
 }
+
+document.getElementById('langNow').addEventListener('change', updateCounter);
+
 function countCell(y, x) {
     var cell = cellGrid[y][x];
     if (cell.getIsAlive() == true) {
@@ -546,7 +570,20 @@ function selectAllAlive(currAliveStatus, currFixedStatus, newAliveStatus, newFix
     world.resize(CELL_DIMENSION);
 }
 
-
+function setAllAlive(newAliveStatus, newFixedStatus) {
+    event.preventDefault();
+    var rows = cellGrid.length;
+    var cols = cellGrid[0].length;
+    for(var i = 0; i < rows; i++) {
+        for(var j = 0; j < cols; j++) {
+    
+                cellGrid[i][j].isAlive = newAliveStatus;
+                cellGrid[i][j].isFixed = newFixedStatus;
+            
+        }
+    }
+    world.resize(CELL_DIMENSION);
+}
 
 function tick() {
     totalRounds++;
@@ -554,7 +591,13 @@ function tick() {
     world.tick();
 }
 
+
+function myFunction(e) {
+
+}
+
 function reverseTick() {
+    world.reverseTick();
 
 }
 
@@ -681,10 +724,13 @@ function openTab(evt, cityName) {
 var playInterval;
 
 function disableButtons() {
-
+    document.getElementById('restore-btn').style.visibility = "hidden";
+    document.getElementById('skip-btn').style.visibility = "hidden";
 }
 
 function enableButtons() {
+    document.getElementById('restore-btn').style.visibility = "visible";
+    document.getElementById('skip-btn').style.visibility = "visible";
 
 }
 
@@ -772,10 +818,6 @@ function updateButtonColor() {
 
 
 
-
-function myFunction(e) {
-    
-}
 
 document.addEventListener("drop", function(ev) {
     var data = ev.dataTransfer.getData("text");

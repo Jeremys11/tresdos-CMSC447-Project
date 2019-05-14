@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Conway's Game of Life</title>
+  <title style>Conway's Game of Life</title>
 
   <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,23 +14,11 @@
 
   <script src="js/jscolor.js"></script>
   <script src="https://unpkg.com/canvas-datagrid"></script>
-
+ <link rel="stylesheet" href="css/stylesheet.css" type="text/css">
 </head>
 
 <body>
-  <script type="text/javascript">
-    if (document.addEventListener) { // IE >= 9; other browsers
-      document.addEventListener('contextmenu', function (e) {
-        alert("You've tried to open context menu"); //here you draw your own menu
-        e.preventDefault();
-      }, false);
-    } else { // IE < 9
-      document.attachEvent('oncontextmenu', function () {
-        alert("You've tried to open context menu");
-        window.event.returnValue = false;
-      });
-    }
-  </script>
+
 
   <body onresize="windowResize()">
     <div id="top-panel">
@@ -57,14 +45,14 @@
         <div id="game-stats-title" class="tabcontent">
           <ul class="tooltip-stat">
             <span data-i18n="stat-tip" class="tooltiptext">Play or pause the simulation</span>
-            <li id="alive-stat-text">Alive: <span id="alive-text"></span></li>
-            <li id="dead-stat-text">Dead: <span id="dead-text"></span></li>
+            <li id="alive-stat-text"> <span id="alive-text"></span></li>
+            <li id="dead-stat-text"><span id="dead-text"></span></li>
           </ul>
         </div>
 
         <div id="change-language" class="tabcontent">
           <span data-i18n="change-language-title" id="change-language-title" class="tab-title">Language</span><br>
-          <select class="langSelector">
+          <select id="langNow" class="langSelector">
             <option data-i18n="engOption" value="en">English</option>
             <option data-i18n="gerOption" value="de">German</option>
           </select>
@@ -92,7 +80,7 @@
     <div id="bottom-panel">
       <div id="box1">
         <div class="flex-container">
-          <div class="tooltipButtonLeft"><button id="restore-btn" class="btn btn-1 btn-1d control-btn"><i
+          <div class="tooltipButtonLeft"><button id="restore-btn" onclick="reverseTick()" class="btn btn-1 btn-1d control-btn"><i
                 class="material-icons md-30">restore</i>
             </button>
             <span data-i18n="restore-tip" class="tooltiptext">Undo</span>
@@ -117,7 +105,7 @@
         <div class="mid-slider">
           <span><i class="material-icons md-30">photo_size_select_small</i></span>
           <span data-i18n="cell-slider" class="tooltiptext">Sets the size of the cells</span>
-          <input type="range" min="9" max="150" value="40" class="slider" id="size-slider">
+          <input type="range" min="9" max="100" value="40" class="slider" id="size-slider">
         </div>
         <div class="mid-slider">
           <span><i class="material-icons md-30">grid_on</i></span>
@@ -126,28 +114,30 @@
         </div>
       </div>
       <div id="box3">
-        <button draggable="true" ondrag="myFunction(event)"
-          class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'484848'}"
+        <button draggable="true" oncontextmenu="setAllAlive(true, false, event)" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateAlive(this)',value:'DCDCDC'}"
           id="aliveColor">Alive</button>
-        <button draggable="true" ondrag="myFunction(event)"
-          class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'484848'}"
+        <button draggable="true" oncontextmenu="setAllAlive(false, false)" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateDead(this)',value:'DCDCDC'}"
           id="deadColor">Dead</button>
-        <button draggable="true" ondrag="myFunction(event)"
-          class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'484848'}" id="fAliveColor">Fixed Alive
+        <button draggable="true" oncontextmenu="setAllAlive(true, true)"ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateFAlive(this)',value:'DCDCDC'}" id="fAliveColor">Fixed Alive
         </button>
-        <button draggable="true" ondrag="myFunction(event)"
-          class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'484848'}" id="fDeadColor">Fixed
+        <button draggable="true" oncontextmenu="setAllAlive(false, true)" ondrag="myFunction(event)"
+          class="jscolor {valueElement:null,onFineChange:'updateFDead(this)',value:'DCDCDC'}" id="fDeadColor">Fixed
           Dead</button>
 
         <button draggable="true" ondrag="myFunction(event)"
-          class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'484848'}"
+          class="jscolor {valueElement:null,onFineChange:'updateBackground(this)',value:'DCDCDC'}"
           id="Backgr">Grid</button>
-        <div id="swapbox">Selector
+
+
+        <div id="swapbox">Select Mode
           <select id="colorSelBox">
-            <option value="a">Alive</option>
-            <option value="b">Dead</option>
-            <option value="c">Fixed Alive</option>
-            <option value="d">Fixed Dead</option>
+            <option  value="a">Alive</option>
+            <option  value="b">Dead</option>
+            <option  value="c">Fixed Alive</option>
+            <option  value="d">Fixed Dead</option>
           </select>
         </div>
       </div>
